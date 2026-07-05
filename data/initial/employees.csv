@@ -1,0 +1,301 @@
+employee_id,first_name,last_name,hire_date,salary,position,is_active,store_id
+1,Liam,Jansen,2019-01-06,2400.00,Barista,true,1
+2,Noah,De Vries,2019-01-11,2800.00,Senior Barista,true,1
+3,Emma,Bakker,2019-01-16,2300.00,Cashier,true,1
+4,Olivia,Visser,2019-01-21,3200.00,Shift Supervisor,true,1
+5,Lucas,Smit,2019-01-26,4200.00,Store Manager,true,1
+6,Mila,Meijer,2019-01-31,2500.00,Kitchen Assistant,true,1
+7,Sophie,De Boer,2019-02-05,2400.00,Barista,true,2
+8,Finn,Mulder,2019-02-10,2800.00,Senior Barista,true,2
+9,Daan,Bos,2019-02-15,2300.00,Cashier,true,2
+10,Julia,Vos,2019-02-20,3200.00,Shift Supervisor,true,2
+11,Levi,Peters,2019-02-25,4200.00,Store Manager,true,2
+12,Sara,Hendriks,2019-03-02,2500.00,Kitchen Assistant,true,2
+13,Mason,Van Dijk,2019-03-07,2400.00,Barista,true,3
+14,Eva,Kuiper,2019-03-12,2800.00,Senior Barista,true,3
+15,Sem,Dekker,2019-03-17,2300.00,Cashier,true,3
+16,Anna,Schouten,2019-03-22,3200.00,Shift Supervisor,true,3
+17,Max,Jansen,2019-03-27,4200.00,Store Manager,true,3
+18,Nina,De Vries,2019-04-01,2500.00,Kitchen Assistant,true,3
+19,Tom,Bakker,2019-04-06,2400.00,Barista,true,4
+20,Ella,Visser,2019-04-11,2800.00,Senior Barista,true,4
+21,Liam,Smit,2019-04-16,2300.00,Cashier,true,4
+22,Noah,Meijer,2019-04-21,3200.00,Shift Supervisor,true,4
+23,Emma,De Boer,2019-04-26,4200.00,Store Manager,true,4
+24,Olivia,Mulder,2019-05-01,2500.00,Kitchen Assistant,true,4
+25,Lucas,Bos,2019-05-06,2400.00,Barista,true,5
+26,Mila,Vos,2019-05-11,2800.00,Senior Barista,true,5
+27,Sophie,Peters,2019-05-16,2300.00,Cashier,true,5
+28,Finn,Hendriks,2019-05-21,3200.00,Shift Supervisor,true,5
+29,Daan,Van Dijk,2019-05-26,4200.00,Store Manager,true,5
+30,Julia,Kuiper,2019-05-31,2500.00,Kitchen Assistant,true,5
+31,Levi,Dekker,2019-06-05,2400.00,Barista,true,6
+32,Sara,Schouten,2019-06-10,2800.00,Senior Barista,true,6
+33,Mason,Jansen,2019-06-15,2300.00,Cashier,true,6
+34,Eva,De Vries,2019-06-20,3200.00,Shift Supervisor,true,6
+35,Sem,Bakker,2019-06-25,4200.00,Store Manager,true,6
+36,Anna,Visser,2019-06-30,2500.00,Kitchen Assistant,true,6
+37,Max,Smit,2019-07-05,2400.00,Barista,true,7
+38,Nina,Meijer,2019-07-10,2800.00,Senior Barista,true,7
+39,Tom,De Boer,2019-07-15,2300.00,Cashier,true,7
+40,Ella,Mulder,2019-07-20,3200.00,Shift Supervisor,true,7
+41,Liam,Bos,2019-07-25,4200.00,Store Manager,true,7
+42,Noah,Vos,2019-07-30,2500.00,Kitchen Assistant,true,7
+43,Emma,Peters,2019-08-04,2400.00,Barista,true,8
+44,Olivia,Hendriks,2019-08-09,2800.00,Senior Barista,true,8
+45,Lucas,Van Dijk,2019-08-14,2300.00,Cashier,true,8
+46,Mila,Kuiper,2019-08-19,3200.00,Shift Supervisor,true,8
+47,Sophie,Dekker,2019-08-24,4200.00,Store Manager,true,8
+48,Finn,Schouten,2019-08-29,2500.00,Kitchen Assistant,true,8
+49,Daan,Jansen,2019-09-03,2400.00,Barista,true,9
+50,Julia,De Vries,2019-09-08,2800.00,Senior Barista,true,9
+51,Levi,Bakker,2019-09-13,2300.00,Cashier,true,9
+52,Sara,Visser,2019-09-18,3200.00,Shift Supervisor,true,9
+53,Mason,Smit,2019-09-23,4200.00,Store Manager,true,9
+54,Eva,Meijer,2019-09-28,2500.00,Kitchen Assistant,true,9
+55,Sem,De Boer,2019-10-03,2400.00,Barista,true,10
+56,Anna,Mulder,2019-10-08,2800.00,Senior Barista,true,10
+57,Max,Bos,2019-10-13,2300.00,Cashier,true,10
+58,Nina,Vos,2019-10-18,3200.00,Shift Supervisor,true,10
+59,Tom,Peters,2019-10-23,4200.00,Store Manager,true,10
+60,Ella,Hendriks,2019-10-28,2500.00,Kitchen Assistant,true,10
+61,Liam,Van Dijk,2019-11-02,2400.00,Barista,true,11
+62,Noah,Kuiper,2019-11-07,2800.00,Senior Barista,true,11
+63,Emma,Dekker,2019-11-12,2300.00,Cashier,true,11
+64,Olivia,Schouten,2019-11-17,3200.00,Shift Supervisor,true,11
+65,Lucas,Jansen,2019-11-22,4200.00,Store Manager,true,11
+66,Mila,De Vries,2019-11-27,2500.00,Kitchen Assistant,true,11
+67,Sophie,Bakker,2019-12-02,2400.00,Barista,true,12
+68,Finn,Visser,2019-12-07,2800.00,Senior Barista,true,12
+69,Daan,Smit,2019-12-12,2300.00,Cashier,true,12
+70,Julia,Meijer,2019-12-17,3200.00,Shift Supervisor,true,12
+71,Levi,De Boer,2019-12-22,4200.00,Store Manager,true,12
+72,Sara,Mulder,2019-12-27,2500.00,Kitchen Assistant,true,12
+73,Mason,Bos,2020-01-01,2400.00,Barista,true,13
+74,Eva,Vos,2020-01-06,2800.00,Senior Barista,true,13
+75,Sem,Peters,2020-01-11,2300.00,Cashier,true,13
+76,Anna,Hendriks,2020-01-16,3200.00,Shift Supervisor,true,13
+77,Max,Van Dijk,2020-01-21,4200.00,Store Manager,true,13
+78,Nina,Kuiper,2020-01-26,2500.00,Kitchen Assistant,true,13
+79,Tom,Dekker,2020-01-31,2400.00,Barista,true,14
+80,Ella,Schouten,2020-02-05,2800.00,Senior Barista,true,14
+81,Liam,Jansen,2020-02-10,2300.00,Cashier,true,14
+82,Noah,De Vries,2020-02-15,3200.00,Shift Supervisor,true,14
+83,Emma,Bakker,2020-02-20,4200.00,Store Manager,true,14
+84,Olivia,Visser,2020-02-25,2500.00,Kitchen Assistant,true,14
+85,Lucas,Smit,2020-03-01,2400.00,Barista,true,15
+86,Mila,Meijer,2020-03-06,2800.00,Senior Barista,true,15
+87,Sophie,De Boer,2020-03-11,2300.00,Cashier,true,15
+88,Finn,Mulder,2020-03-16,3200.00,Shift Supervisor,true,15
+89,Daan,Bos,2020-03-21,4200.00,Store Manager,true,15
+90,Julia,Vos,2020-03-26,2500.00,Kitchen Assistant,true,15
+91,Levi,Peters,2020-03-31,2400.00,Barista,true,16
+92,Sara,Hendriks,2020-04-05,2800.00,Senior Barista,true,16
+93,Mason,Van Dijk,2020-04-10,2300.00,Cashier,true,16
+94,Eva,Kuiper,2020-04-15,3200.00,Shift Supervisor,true,16
+95,Sem,Dekker,2020-04-20,4200.00,Store Manager,true,16
+96,Anna,Schouten,2020-04-25,2500.00,Kitchen Assistant,true,16
+97,Max,Jansen,2020-04-30,2400.00,Barista,true,17
+98,Nina,De Vries,2020-05-05,2800.00,Senior Barista,true,17
+99,Tom,Bakker,2020-05-10,2300.00,Cashier,true,17
+100,Ella,Visser,2020-05-15,3200.00,Shift Supervisor,true,17
+101,Liam,Smit,2020-05-20,4200.00,Store Manager,true,17
+102,Noah,Meijer,2020-05-25,2500.00,Kitchen Assistant,true,17
+103,Emma,De Boer,2020-05-30,2400.00,Barista,true,18
+104,Olivia,Mulder,2020-06-04,2800.00,Senior Barista,true,18
+105,Lucas,Bos,2020-06-09,2300.00,Cashier,true,18
+106,Mila,Vos,2020-06-14,3200.00,Shift Supervisor,true,18
+107,Sophie,Peters,2020-06-19,4200.00,Store Manager,true,18
+108,Finn,Hendriks,2020-06-24,2500.00,Kitchen Assistant,true,18
+109,Daan,Van Dijk,2020-06-29,2400.00,Barista,true,19
+110,Julia,Kuiper,2020-07-04,2800.00,Senior Barista,true,19
+111,Levi,Dekker,2020-07-09,2300.00,Cashier,true,19
+112,Sara,Schouten,2020-07-14,3200.00,Shift Supervisor,true,19
+113,Mason,Jansen,2020-07-19,4200.00,Store Manager,true,19
+114,Eva,De Vries,2020-07-24,2500.00,Kitchen Assistant,true,19
+115,Sem,Bakker,2020-07-29,2400.00,Barista,true,20
+116,Anna,Visser,2020-08-03,2800.00,Senior Barista,true,20
+117,Max,Smit,2020-08-08,2300.00,Cashier,true,20
+118,Nina,Meijer,2020-08-13,3200.00,Shift Supervisor,true,20
+119,Tom,De Boer,2020-08-18,4200.00,Store Manager,true,20
+120,Ella,Mulder,2020-08-23,2500.00,Kitchen Assistant,true,20
+121,Liam,Bos,2020-08-28,2400.00,Barista,true,21
+122,Noah,Vos,2020-09-02,2800.00,Senior Barista,true,21
+123,Emma,Peters,2020-09-07,2300.00,Cashier,true,21
+124,Olivia,Hendriks,2020-09-12,3200.00,Shift Supervisor,true,21
+125,Lucas,Van Dijk,2020-09-17,4200.00,Store Manager,true,21
+126,Mila,Kuiper,2020-09-22,2500.00,Kitchen Assistant,true,21
+127,Sophie,Dekker,2020-09-27,2400.00,Barista,true,22
+128,Finn,Schouten,2020-10-02,2800.00,Senior Barista,true,22
+129,Daan,Jansen,2020-10-07,2300.00,Cashier,true,22
+130,Julia,De Vries,2020-10-12,3200.00,Shift Supervisor,true,22
+131,Levi,Bakker,2020-10-17,4200.00,Store Manager,true,22
+132,Sara,Visser,2020-10-22,2500.00,Kitchen Assistant,true,22
+133,Mason,Smit,2020-10-27,2400.00,Barista,true,23
+134,Eva,Meijer,2020-11-01,2800.00,Senior Barista,true,23
+135,Sem,De Boer,2020-11-06,2300.00,Cashier,true,23
+136,Anna,Mulder,2020-11-11,3200.00,Shift Supervisor,true,23
+137,Max,Bos,2020-11-16,4200.00,Store Manager,true,23
+138,Nina,Vos,2020-11-21,2500.00,Kitchen Assistant,true,23
+139,Tom,Peters,2020-11-26,2400.00,Barista,true,24
+140,Ella,Hendriks,2020-12-01,2800.00,Senior Barista,true,24
+141,Liam,Van Dijk,2020-12-06,2300.00,Cashier,true,24
+142,Noah,Kuiper,2020-12-11,3200.00,Shift Supervisor,true,24
+143,Emma,Dekker,2020-12-16,4200.00,Store Manager,true,24
+144,Olivia,Schouten,2020-12-21,2500.00,Kitchen Assistant,true,24
+145,Lucas,Jansen,2020-12-26,2400.00,Barista,true,25
+146,Mila,De Vries,2020-12-31,2800.00,Senior Barista,true,25
+147,Sophie,Bakker,2021-01-05,2300.00,Cashier,true,25
+148,Finn,Visser,2021-01-10,3200.00,Shift Supervisor,true,25
+149,Daan,Smit,2021-01-15,4200.00,Store Manager,true,25
+150,Julia,Meijer,2021-01-20,2500.00,Kitchen Assistant,true,25
+151,Levi,De Boer,2021-01-25,2400.00,Barista,true,26
+152,Sara,Mulder,2021-01-30,2800.00,Senior Barista,true,26
+153,Mason,Bos,2021-02-04,2300.00,Cashier,true,26
+154,Eva,Vos,2021-02-09,3200.00,Shift Supervisor,true,26
+155,Sem,Peters,2021-02-14,4200.00,Store Manager,true,26
+156,Anna,Hendriks,2021-02-19,2500.00,Kitchen Assistant,true,26
+157,Max,Van Dijk,2021-02-24,2400.00,Barista,true,27
+158,Nina,Kuiper,2021-03-01,2800.00,Senior Barista,true,27
+159,Tom,Dekker,2021-03-06,2300.00,Cashier,true,27
+160,Ella,Schouten,2021-03-11,3200.00,Shift Supervisor,true,27
+161,Liam,Jansen,2021-03-16,4200.00,Store Manager,true,27
+162,Noah,De Vries,2021-03-21,2500.00,Kitchen Assistant,true,27
+163,Emma,Bakker,2021-03-26,2400.00,Barista,true,28
+164,Olivia,Visser,2021-03-31,2800.00,Senior Barista,true,28
+165,Lucas,Smit,2021-04-05,2300.00,Cashier,true,28
+166,Mila,Meijer,2021-04-10,3200.00,Shift Supervisor,true,28
+167,Sophie,De Boer,2021-04-15,4200.00,Store Manager,true,28
+168,Finn,Mulder,2021-04-20,2500.00,Kitchen Assistant,true,28
+169,Daan,Bos,2021-04-25,2400.00,Barista,true,29
+170,Julia,Vos,2021-04-30,2800.00,Senior Barista,true,29
+171,Levi,Peters,2021-05-05,2300.00,Cashier,true,29
+172,Sara,Hendriks,2021-05-10,3200.00,Shift Supervisor,true,29
+173,Mason,Van Dijk,2021-05-15,4200.00,Store Manager,true,29
+174,Eva,Kuiper,2021-05-20,2500.00,Kitchen Assistant,true,29
+175,Sem,Dekker,2021-05-25,2400.00,Barista,true,30
+176,Anna,Schouten,2021-05-30,2800.00,Senior Barista,true,30
+177,Max,Jansen,2021-06-04,2300.00,Cashier,true,30
+178,Nina,De Vries,2021-06-09,3200.00,Shift Supervisor,true,30
+179,Tom,Bakker,2021-06-14,4200.00,Store Manager,true,30
+180,Ella,Visser,2021-06-19,2500.00,Kitchen Assistant,true,30
+181,Liam,Smit,2021-06-24,2400.00,Barista,true,31
+182,Noah,Meijer,2021-06-29,2800.00,Senior Barista,true,31
+183,Emma,De Boer,2021-07-04,2300.00,Cashier,true,31
+184,Olivia,Mulder,2021-07-09,3200.00,Shift Supervisor,true,31
+185,Lucas,Bos,2021-07-14,4200.00,Store Manager,true,31
+186,Mila,Vos,2021-07-19,2500.00,Kitchen Assistant,true,31
+187,Sophie,Peters,2021-07-24,2400.00,Barista,true,32
+188,Finn,Hendriks,2021-07-29,2800.00,Senior Barista,true,32
+189,Daan,Van Dijk,2021-08-03,2300.00,Cashier,true,32
+190,Julia,Kuiper,2021-08-08,3200.00,Shift Supervisor,true,32
+191,Levi,Dekker,2021-08-13,4200.00,Store Manager,true,32
+192,Sara,Schouten,2021-08-18,2500.00,Kitchen Assistant,true,32
+193,Mason,Jansen,2021-08-23,2400.00,Barista,true,33
+194,Eva,De Vries,2021-08-28,2800.00,Senior Barista,true,33
+195,Sem,Bakker,2021-09-02,2300.00,Cashier,true,33
+196,Anna,Visser,2021-09-07,3200.00,Shift Supervisor,true,33
+197,Max,Smit,2021-09-12,4200.00,Store Manager,true,33
+198,Nina,Meijer,2021-09-17,2500.00,Kitchen Assistant,true,33
+199,Tom,De Boer,2021-09-22,2400.00,Barista,true,34
+200,Ella,Mulder,2021-09-27,2800.00,Senior Barista,true,34
+201,Liam,Bos,2021-10-02,2300.00,Cashier,true,34
+202,Noah,Vos,2021-10-07,3200.00,Shift Supervisor,true,34
+203,Emma,Peters,2021-10-12,4200.00,Store Manager,true,34
+204,Olivia,Hendriks,2021-10-17,2500.00,Kitchen Assistant,true,34
+205,Lucas,Van Dijk,2021-10-22,2400.00,Barista,true,35
+206,Mila,Kuiper,2021-10-27,2800.00,Senior Barista,true,35
+207,Sophie,Dekker,2021-11-01,2300.00,Cashier,true,35
+208,Finn,Schouten,2021-11-06,3200.00,Shift Supervisor,true,35
+209,Daan,Jansen,2021-11-11,4200.00,Store Manager,true,35
+210,Julia,De Vries,2021-11-16,2500.00,Kitchen Assistant,true,35
+211,Levi,Bakker,2021-11-21,2400.00,Barista,true,36
+212,Sara,Visser,2021-11-26,2800.00,Senior Barista,true,36
+213,Mason,Smit,2021-12-01,2300.00,Cashier,true,36
+214,Eva,Meijer,2021-12-06,3200.00,Shift Supervisor,true,36
+215,Sem,De Boer,2021-12-11,4200.00,Store Manager,true,36
+216,Anna,Mulder,2021-12-16,2500.00,Kitchen Assistant,true,36
+217,Max,Bos,2021-12-21,2400.00,Barista,true,37
+218,Nina,Vos,2021-12-26,2800.00,Senior Barista,true,37
+219,Tom,Peters,2021-12-31,2300.00,Cashier,true,37
+220,Ella,Hendriks,2022-01-05,3200.00,Shift Supervisor,true,37
+221,Liam,Van Dijk,2022-01-10,4200.00,Store Manager,true,37
+222,Noah,Kuiper,2022-01-15,2500.00,Kitchen Assistant,true,37
+223,Emma,Dekker,2022-01-20,2400.00,Barista,true,38
+224,Olivia,Schouten,2022-01-25,2800.00,Senior Barista,true,38
+225,Lucas,Jansen,2022-01-30,2300.00,Cashier,true,38
+226,Mila,De Vries,2022-02-04,3200.00,Shift Supervisor,true,38
+227,Sophie,Bakker,2022-02-09,4200.00,Store Manager,true,38
+228,Finn,Visser,2022-02-14,2500.00,Kitchen Assistant,true,38
+229,Daan,Smit,2022-02-19,2400.00,Barista,true,39
+230,Julia,Meijer,2022-02-24,2800.00,Senior Barista,true,39
+231,Levi,De Boer,2022-03-01,2300.00,Cashier,true,39
+232,Sara,Mulder,2022-03-06,3200.00,Shift Supervisor,true,39
+233,Mason,Bos,2022-03-11,4200.00,Store Manager,true,39
+234,Eva,Vos,2022-03-16,2500.00,Kitchen Assistant,true,39
+235,Sem,Peters,2022-03-21,2400.00,Barista,true,40
+236,Anna,Hendriks,2022-03-26,2800.00,Senior Barista,true,40
+237,Max,Van Dijk,2022-03-31,2300.00,Cashier,true,40
+238,Nina,Kuiper,2022-04-05,3200.00,Shift Supervisor,true,40
+239,Tom,Dekker,2022-04-10,4200.00,Store Manager,true,40
+240,Ella,Schouten,2022-04-15,2500.00,Kitchen Assistant,true,40
+241,Liam,Jansen,2022-04-20,2400.00,Barista,true,41
+242,Noah,De Vries,2022-04-25,2800.00,Senior Barista,true,41
+243,Emma,Bakker,2022-04-30,2300.00,Cashier,true,41
+244,Olivia,Visser,2022-05-05,3200.00,Shift Supervisor,true,41
+245,Lucas,Smit,2022-05-10,4200.00,Store Manager,true,41
+246,Mila,Meijer,2022-05-15,2500.00,Kitchen Assistant,true,41
+247,Sophie,De Boer,2022-05-20,2400.00,Barista,true,42
+248,Finn,Mulder,2022-05-25,2800.00,Senior Barista,true,42
+249,Daan,Bos,2022-05-30,2300.00,Cashier,true,42
+250,Julia,Vos,2022-06-04,3200.00,Shift Supervisor,true,42
+251,Levi,Peters,2022-06-09,4200.00,Store Manager,true,42
+252,Sara,Hendriks,2022-06-14,2500.00,Kitchen Assistant,true,42
+253,Mason,Van Dijk,2022-06-19,2400.00,Barista,true,43
+254,Eva,Kuiper,2022-06-24,2800.00,Senior Barista,true,43
+255,Sem,Dekker,2022-06-29,2300.00,Cashier,true,43
+256,Anna,Schouten,2022-07-04,3200.00,Shift Supervisor,true,43
+257,Max,Jansen,2022-07-09,4200.00,Store Manager,true,43
+258,Nina,De Vries,2022-07-14,2500.00,Kitchen Assistant,true,43
+259,Tom,Bakker,2022-07-19,2400.00,Barista,true,44
+260,Ella,Visser,2022-07-24,2800.00,Senior Barista,true,44
+261,Liam,Smit,2022-07-29,2300.00,Cashier,true,44
+262,Noah,Meijer,2022-08-03,3200.00,Shift Supervisor,true,44
+263,Emma,De Boer,2022-08-08,4200.00,Store Manager,true,44
+264,Olivia,Mulder,2022-08-13,2500.00,Kitchen Assistant,true,44
+265,Lucas,Bos,2022-08-18,2400.00,Barista,true,45
+266,Mila,Vos,2022-08-23,2800.00,Senior Barista,true,45
+267,Sophie,Peters,2022-08-28,2300.00,Cashier,true,45
+268,Finn,Hendriks,2022-09-02,3200.00,Shift Supervisor,true,45
+269,Daan,Van Dijk,2022-09-07,4200.00,Store Manager,true,45
+270,Julia,Kuiper,2022-09-12,2500.00,Kitchen Assistant,true,45
+271,Levi,Dekker,2022-09-17,2400.00,Barista,true,46
+272,Sara,Schouten,2022-09-22,2800.00,Senior Barista,true,46
+273,Mason,Jansen,2022-09-27,2300.00,Cashier,true,46
+274,Eva,De Vries,2022-10-02,3200.00,Shift Supervisor,true,46
+275,Sem,Bakker,2022-10-07,4200.00,Store Manager,true,46
+276,Anna,Visser,2022-10-12,2500.00,Kitchen Assistant,true,46
+277,Max,Smit,2022-10-17,2400.00,Barista,true,47
+278,Nina,Meijer,2022-10-22,2800.00,Senior Barista,true,47
+279,Tom,De Boer,2022-10-27,2300.00,Cashier,true,47
+280,Ella,Mulder,2022-11-01,3200.00,Shift Supervisor,true,47
+281,Liam,Bos,2022-11-06,4200.00,Store Manager,true,47
+282,Noah,Vos,2022-11-11,2500.00,Kitchen Assistant,true,47
+283,Emma,Peters,2022-11-16,2400.00,Barista,true,48
+284,Olivia,Hendriks,2022-11-21,2800.00,Senior Barista,true,48
+285,Lucas,Van Dijk,2022-11-26,2300.00,Cashier,true,48
+286,Mila,Kuiper,2022-12-01,3200.00,Shift Supervisor,true,48
+287,Sophie,Dekker,2022-12-06,4200.00,Store Manager,true,48
+288,Finn,Schouten,2022-12-11,2500.00,Kitchen Assistant,true,48
+289,Daan,Jansen,2022-12-16,2400.00,Barista,true,49
+290,Julia,De Vries,2022-12-21,2800.00,Senior Barista,true,49
+291,Levi,Bakker,2022-12-26,2300.00,Cashier,true,49
+292,Sara,Visser,2022-12-31,3200.00,Shift Supervisor,true,49
+293,Mason,Smit,2023-01-05,4200.00,Store Manager,true,49
+294,Eva,Meijer,2023-01-10,2500.00,Kitchen Assistant,true,49
+295,Sem,De Boer,2023-01-15,2400.00,Barista,true,50
+296,Anna,Mulder,2023-01-20,2800.00,Senior Barista,true,50
+297,Max,Bos,2023-01-25,2300.00,Cashier,true,50
+298,Nina,Vos,2023-01-30,3200.00,Shift Supervisor,true,50
+299,Tom,Peters,2023-02-04,4200.00,Store Manager,true,50
+300,Ella,Hendriks,2023-02-09,2500.00,Kitchen Assistant,true,50
