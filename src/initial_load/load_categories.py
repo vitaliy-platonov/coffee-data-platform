@@ -4,43 +4,46 @@ import csv
 
 file_path = r"C:\Users\vital\OneDrive\Рабочий стол\coffee-data-platform\data\initial\categories.csv"
 
-connection = None
+def load_categories(file_path):
+    connection = None
 
-try:
-    connection = psycopg.connect(
-        host='localhost',
-        port=5432,
-        dbname='coffee_data_platform',
-        user='postgres',
-        password='1234'
-    )
+    try:
+        connection = psycopg.connect(
+            host='localhost',
+            port=5432,
+            dbname='coffee_data_platform',
+            user='postgres',
+            password='1234'
+        )
 
-    cursor = connection.cursor()
+        cursor = connection.cursor()
 
-    with open(file_path, 'r', encoding='utf-8') as file:
-        reader = csv.reader(file)
+        with open(file_path, 'r', encoding='utf-8') as file:
+            reader = csv.reader(file)
 
-        next(reader)
+            next(reader)
 
-        for row in reader:
-            print(row)
+            for row in reader:
 
-            cursor.execute(
-                """
-                INSERT INTO categories (category_id, category_name)
-                VALUES (%s, %s);
-                """,
-                (row[0], row[1])
-            )
+                cursor.execute(
+                    """
+                    INSERT INTO categories (category_id, category_name)
+                    VALUES (%s, %s);
+                    """,
+                    (row[0], row[1])
+                )
 
-    connection.commit()
+        connection.commit()
 
-except psycopg.OperationalError as e:
-    print(e)
+    except psycopg.OperationalError as e:
+        print(e)
 
-except FileNotFoundError:
-    print("Файл не найден")
+    except FileNotFoundError:
+        print("Файл не найден")
 
-finally:
-    if connection:
-        connection.close()
+    finally:
+        if connection:
+            connection.close()
+
+if __name__ == "__main__":
+    load_categories(file_path)

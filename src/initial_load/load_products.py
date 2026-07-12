@@ -4,41 +4,44 @@ import csv
 
 file_path = r"C:\Users\vital\OneDrive\Рабочий стол\coffee-data-platform\data\initial\products.csv"
 
-connection = None
+def load_products(file_path):
+    connection = None
 
-try:
-    connection = psycopg.connect(
-        host='localhost',
-        port=5432,
-        dbname='coffee_data_platform',
-        user='postgres',
-        password='1234'
-    )
+    try:
+        connection = psycopg.connect(
+            host='localhost',
+            port=5432,
+            dbname='coffee_data_platform',
+            user='postgres',
+            password='1234'
+        )
 
-    cursor = connection.cursor()
+        cursor = connection.cursor()
 
-    with open(file_path, 'r', encoding='utf-8') as file:
-        reader = csv.reader(file)
+        with open(file_path, 'r', encoding='utf-8') as file:
+            reader = csv.reader(file)
 
-        next(reader)
+            next(reader)
 
-        for row in reader:
-            cursor.execute(
-                """INSERT INTO products (
-                product_id,
-                product_name,
-                price,
-                category_id,
-                supplier_id)
-                VALUES (%s, %s, %s, %s, %s)""",
-                (row[0], row[1], row[2], row[3], row[4])
-            )
+            for row in reader:
+                cursor.execute(
+                    """INSERT INTO products (
+                    product_id,
+                    product_name,
+                    price,
+                    category_id,
+                    supplier_id)
+                    VALUES (%s, %s, %s, %s, %s)""",
+                    (row[0], row[1], row[2], row[3], row[4])
+                )
 
-            connection.commit()
-except psycopg.OperationalError as error:
-    print(f"Database connection error: {error}")
-except FileNotFoundError as error:
-    print(f"File not found: {error}")
-finally:
-    if connection:
-        connection.close()
+        connection.commit()
+    except psycopg.OperationalError as error:
+        print(f"Database connection error: {error}")
+    except FileNotFoundError as error:
+        print(f"File not found: {error}")
+    finally:
+        if connection:
+            connection.close()
+if __name__ == "__main__":
+    load_products(file_path)
