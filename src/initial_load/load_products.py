@@ -2,8 +2,10 @@
 from database import get_connection
 import psycopg
 import csv
+import os
+from config import INITIAL_DATA_DIR
 
-file_path = r"C:\Users\vital\OneDrive\Рабочий стол\coffee-data-platform\data\initial\products.csv"
+file_path = os.path.join(INITIAL_DATA_DIR, "products.csv")
 
 def load_products(file_path):
     connection = None
