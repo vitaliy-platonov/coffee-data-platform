@@ -4,6 +4,7 @@ import psycopg
 import csv
 import os
 from config import INITIAL_DATA_DIR
+import logging
 
 file_path = os.path.join(INITIAL_DATA_DIR, "customers.csv")
 
@@ -14,6 +15,8 @@ def load_customers(file_path):
         connection = get_connection()
 
         cursor = connection.cursor()
+
+        rows_loaded = 0
 
         with open(file_path, 'r', encoding='utf-8') as file:
             reader = csv.reader(file)
@@ -34,12 +37,15 @@ def load_customers(file_path):
                         """,
                     (row[0], row[1], row[2], row[3], row[4], row[5], row[6])
                 )
+                rows_loaded += 1
 
         connection.commit()
+        return rows_loaded
     except psycopg.OperationalError as error:
-        print(f"Database connection error: {error}")
+        logging.error(f"Database connection error: {error}")
+
     except FileNotFoundError as error:
-        print(f"File not found: {error}")
+        logging.error(f"File not found: {error}")
     finally:
         if connection:
             connection.close()

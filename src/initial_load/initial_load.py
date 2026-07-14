@@ -2,6 +2,11 @@
 from database import get_connection
 import psycopg
 import os
+import logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s: %(message)s"
+)
 
 from load_categories import load_categories
 from load_suppliers import load_suppliers
@@ -126,18 +131,50 @@ def reset_database():
 
 
 def run_initial_load():
+    logging.info("Starting initial Load Pipeline")
     reset_database()
 
-    load_categories(categories_path)
-    load_suppliers(suppliers_path)
-    load_stores(stores_path)
-    load_customers(customers_path)
-    load_products(products_path)
-    load_employees(employees_path)
-    load_orders(orders_path)
-    load_deliveries(deliveries_path)
-    load_payments(payments_path)
-    load_order_items(order_items_path)
+    logging.info("Loading categories...")
+    categories_count = load_categories(categories_path)
+    logging.info(f"Categories loaded: {categories_count} rows")
+
+    logging.info("Loading suppliers...")
+    suppliers_count = load_suppliers(suppliers_path)
+    logging.info(f"Suppliers loaded: {suppliers_count} rows")
+
+    logging.info("Loading stores...")
+    stores_count = load_stores(stores_path)
+    logging.info(f"Stores loaded: {stores_count} rows")
+
+    logging.info("Loading customers...")
+    customers_count = load_customers(customers_path)
+    logging.info(f"Customers loaded: {customers_count} rows")
+
+    logging.info("loading products...")
+    products_count = load_products(products_path)
+    logging.info(f"Products loaded: {products_count} rows")
+
+    logging.info("Loading employees...")
+    employees_count = load_employees(employees_path)
+    logging.info(f"Employees loaded: {employees_count} rows")
+
+    logging.info("Loading orders...")
+    orders_count = load_orders(orders_path)
+    logging.info(f"Orders loaded: {orders_count} rows")
+
+    logging.info("Loading deliveries...")
+    deliveries_count = load_deliveries(deliveries_path)
+    logging.info(f"Deliveries loaded: {deliveries_count} rows")
+
+    logging.info("Loading payments...")
+    payments_count = load_payments(payments_path)
+    logging.info(f"Payments loaded: {payments_count} rows")
+
+    logging.info("Loading order items...")
+    order_items_count = load_order_items(order_items_path)
+    logging.info(f"Order_items loaded: {order_items_count} rows")
+
+    logging.info("Initial Load Pipeline completed successfully")
 
 
 if __name__ == "__main__":
