@@ -1,3 +1,5 @@
+
+from database import get_connection
 import psycopg
 import os
 
@@ -101,13 +103,7 @@ def reset_database():
     connection = None
 
     try:
-        connection = psycopg.connect(
-            host="localhost",
-            port=5432,
-            dbname="coffee_data_platform",
-            user="postgres",
-            password="1234"
-        )
+        connection = get_connection()
 
         cursor = connection.cursor()
 

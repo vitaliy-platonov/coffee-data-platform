@@ -1,4 +1,5 @@
 
+from database import get_connection
 import psycopg
 import csv
 
@@ -8,13 +9,7 @@ def load_order_items(file_path):
     connection = None
 
     try:
-        connection = psycopg.connect(
-            host='localhost',
-            port=5432,
-            dbname='coffee_data_platform',
-            user='postgres',
-            password='1234'
-        )
+        connection = get_connection()
 
         cursor = connection.cursor()
 
