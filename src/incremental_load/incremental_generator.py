@@ -32,7 +32,7 @@ def generate_customers(count):
             "customer_id": next_customer_id + i,
             "first_name": fake.first_name(),
             "last_name": fake.last_name(),
-            "phone": fake.phone_number(),
+            "phone": fake.phone_number()[:20],
             "email": fake.email(),
             "city": fake.city(),
             "registration_date": fake.date()
