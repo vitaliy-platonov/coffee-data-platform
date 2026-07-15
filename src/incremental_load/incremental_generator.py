@@ -1,4 +1,7 @@
 
+from config import INCREMENTAL_DATA_DIR
+import csv
+import os
 from faker import Faker
 from database import get_connection
 
@@ -19,16 +22,25 @@ def get_next_customer_id():
 
     return last_customer_id + 1
 
-def generate_customers():
-    customer_id = get_next_customer_id()
+def generate_customers(count):
+    customers = []
 
-    customer = {
-        "customer_id": customer_id,
-        "full_name": fake.name(),
-        "email": fake.email(),
-        "phone": fake.phone_number()
-    }
-    print(customer)
+    next_customer_id = get_next_customer_id()
+
+    for i in range(count):
+        customer = {
+            "customer_id": next_customer_id + i,
+            "first_name": fake.first_name(),
+            "last_name": fake.last_name(),
+            "phone": fake.phone_number(),
+            "email": fake.email(),
+            "city": fake.city(),
+            "registration_date": fake.date()
+        }
+
+        customers.append(customer)
+
+    return customers
 
 def generate_orders():
     pass
@@ -42,6 +54,26 @@ def generate_payments():
 def generate_deliveries():
     pass
 
+def save_customers_to_csv(customers):
+    file_path = os.path.join(INCREMENTAL_DATA_DIR,
+                             "customers_increment.csv")
+
+    with open(file_path, 'w', newline='', encoding='utf-8') as file:
+        writer = csv.DictWriter(
+            file,
+            fieldnames=[
+                "customer_id",
+                "first_name",
+                "last_name",
+                "phone",
+                "email",
+                "city",
+                "registration_date"
+            ]
+        )
+        writer.writeheader()
+        writer.writerows(customers)
+
 def generate_incremental_data():
     generate_customers()
     generate_orders()
@@ -53,4 +85,5 @@ def generate_incremental_data():
 
 
 if __name__ == "__main__":
-    generate_customers()
+    customer = generate_customers(3)
+    save_customers_to_csv(customer)
