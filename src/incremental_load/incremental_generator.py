@@ -261,6 +261,92 @@ def save_order_items_to_csv(order_items):
         writer.writeheader()
         writer.writerows(order_items)
 
+def save_payments_to_csv(payments):
+    file_path = os.path.join(INCREMENTAL_DATA_DIR,
+                             "payments_increment.csv")
+    with open(file_path, 'w', newline='', encoding='utf-8') as file:
+        writer = csv.DictWriter(
+            file,
+            fieldnames=[
+                "payment_id",
+                "order_id",
+                "payment_date",
+                "payment_method",
+                "amount",
+                "status"
+            ])
+        writer.writeheader()
+        writer.writerows(payments)
+
+
+def get_next_payment_id():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT MAX(payment_id) FROM payments""")
+
+    next_payment_id = cursor.fetchone()[0]
+    cursor.close()
+    conn.close()
+    return next_payment_id + 1
+
+def get_order_amounts():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT order_id, total_amount
+    FROM orders
+    """)
+
+    order_amounts = {
+        row[0]: row[1]
+        for row in cursor.fetchall()
+    }
+
+    cursor.close()
+    conn.close()
+
+    return order_amounts
+
+def generate_payments(count):
+    payments = []
+
+    next_payment_id = get_next_payment_id()
+    order_ids = get_existing_order_ids()
+    order_amounts = get_order_amounts()
+
+    for i in range(count):
+
+        order_id = random.choice(order_ids)
+
+        payment = {
+            "payment_id": next_payment_id + i,
+            "order_id": order_id,
+            "payment_date": fake.date_between(
+                start_date="-30d",
+                end_date="today"
+            ),
+            "payment_method": random.choice(
+                [
+                    "card",
+                    "cash",
+                    "online"
+                ]
+            ),
+            "amount": order_amounts[order_id],
+            "status": random.choice(
+                [
+                    "completed",
+                    "pending",
+                    "failed"
+                ]
+            )
+        }
+
+        payments.append(payment)
+
+    return payments
 
 
 def generate_incremental_data():
@@ -276,5 +362,7 @@ if __name__ == "__main__":
     # save_customers_to_csv(customer)
     # orders = generate_orders(5)
     # save_orders_to_csv(orders)
-    order_items = generate_order_items(5)
-    save_order_items_to_csv(order_items)
+    # order_items = generate_order_items(5)
+    # save_order_items_to_csv(order_items)
+    payments = generate_payments(5)
+    save_payments_to_csv(payments)
