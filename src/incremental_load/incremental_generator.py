@@ -43,6 +43,20 @@ def generate_customers(count):
 
     return customers
 
+def get_existing_customers_ids():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT customer_id FROM customers""")
+
+    customer_ids = [row[0] for row in cursor.fetchall()]
+
+    cursor.close()
+    conn.close()
+
+    return customer_ids
+
 def get_next_order_id():
     conn = get_connection()
     cursor = conn.cursor()
@@ -88,20 +102,6 @@ def generate_orders(count):
     return orders
 
 
-def get_existing_customers_ids():
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("""
-    SELECT customer_id FROM customers""")
-
-    customer_ids = [row[0] for row in cursor.fetchall()]
-
-    cursor.close()
-    conn.close()
-
-    return customer_ids
-
 def get_existing_store_ids():
     conn = get_connection()
     cursor = conn.cursor()
@@ -127,6 +127,83 @@ def get_existing_employee_ids():
     conn.close()
 
     return employee_ids
+
+
+def get_next_order_item_id():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT MAX(order_item_id) FROM order_items""")
+
+    next_order_item_id = cursor.fetchone()[0]
+
+    cursor.close()
+    conn.close()
+
+    return next_order_item_id + 1
+
+def get_existing_order_ids():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT order_id
+    FROM orders
+    """)
+
+    order_ids = [row[0] for row in cursor.fetchall()]
+
+    cursor.close()
+    conn.close()
+    return order_ids
+
+def get_existing_product_ids():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT product_id FROM products""")
+
+    product_ids = [row[0] for row in cursor.fetchall()]
+    cursor.close()
+    conn.close()
+    return product_ids
+
+def get_product_prices():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT product_id, price
+    FROM products
+    """)
+
+    product_prices = {
+        row[0]: row[1]
+        for row in cursor.fetchall()
+    }
+
+    cursor.close()
+    conn.close()
+
+    return product_prices
+
+def generate_order_items(count):
+    order_items = []
+    next_order_item_id = get_next_order_item_id()
+    order_ids = get_existing_order_ids()
+    product_ids = get_existing_product_ids()
+    product_prices = get_product_prices()
+
+    for i in range(count):
+        order_item = {
+            "order_item_id": next_order_item_id + i,
+            "order_id": random.choice(order_ids),
+            "product_id": random.choice(product_ids),
+            "quantity": random.randint(1, 5),
+            "price": random.choice(product_ids)
+        }
+
+        order_items.append(order_item)
+    return order_items
 
 
 def save_customers_to_csv(customers):
@@ -167,6 +244,23 @@ def save_orders_to_csv(orders):
         writer.writeheader()
         writer.writerows(orders)
 
+def save_order_items_to_csv(order_items):
+    file_path = os.path.join(INCREMENTAL_DATA_DIR,
+                             "order_items_increment.csv")
+    with open(file_path, 'w', newline='', encoding='utf-8') as file:
+        writer = csv.DictWriter(
+            file,
+            fieldnames=[
+                "order_item_id",
+                "order_id",
+                "product_id",
+                "quantity",
+                "price"
+            ]
+        )
+        writer.writeheader()
+        writer.writerows(order_items)
+
 
 
 def generate_incremental_data():
@@ -180,6 +274,7 @@ def generate_incremental_data():
 if __name__ == "__main__":
     # customer = generate_customers(3)
     # save_customers_to_csv(customer)
-
-    orders = generate_orders(5)
-    save_orders_to_csv(orders)
+    # orders = generate_orders(5)
+    # save_orders_to_csv(orders)
+    order_items = generate_order_items(5)
+    save_order_items_to_csv(order_items)
