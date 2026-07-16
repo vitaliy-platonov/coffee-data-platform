@@ -278,6 +278,24 @@ def save_payments_to_csv(payments):
         writer.writeheader()
         writer.writerows(payments)
 
+def save_deliveries_to_csv(deliveries):
+    file_path = os.path.join(INCREMENTAL_DATA_DIR,
+                             "deliveries_increment.csv")
+    with open(file_path, 'w', newline='', encoding='utf-8') as file:
+        writer = csv.DictWriter(
+            file,
+            fieldnames=[
+                "delivery_id",
+                "supplier_id",
+                "store_id",
+                "product_id",
+                "quantity",
+                "delivery_date"
+            ]
+        )
+        writer.writeheader()
+        writer.writerows(deliveries)
+
 
 def get_next_payment_id():
     conn = get_connection()
@@ -348,6 +366,47 @@ def generate_payments(count):
 
     return payments
 
+def get_next_delivery_id():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT MAX(delivery_id) FROM deliveries""")
+    next_delivery_id = cursor.fetchone()[0]
+    cursor.close()
+    conn.close()
+    return next_delivery_id + 1
+
+def get_existing_supplier_ids():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT supplier_id FROM suppliers""")
+    supplier_ids = [row[0] for row in cursor.fetchall()]
+    cursor.close()
+    conn.close()
+    return supplier_ids
+
+def generate_deliveries(count):
+    deliveries = []
+    next_delivery_id = get_next_delivery_id()
+    supplier_ids = get_existing_supplier_ids()
+    store_ids = get_existing_store_ids()
+    product_ids = get_existing_product_ids()
+    for i in range(count):
+        delivery = {
+            "delivery_id": next_delivery_id + i,
+            "supplier_id": random.choice(supplier_ids),
+            "store_id": random.choice(store_ids),
+            "product_id": random.choice(product_ids),
+            "quantity": random.randint(10, 100),
+            "delivery_date": fake.date_between(
+                        start_date="-30d",
+                        end_date="today"
+)
+        }
+        deliveries.append(delivery)
+    return deliveries
+
 
 def generate_incremental_data():
     generate_customers()
@@ -364,5 +423,7 @@ if __name__ == "__main__":
     # save_orders_to_csv(orders)
     # order_items = generate_order_items(5)
     # save_order_items_to_csv(order_items)
-    payments = generate_payments(5)
-    save_payments_to_csv(payments)
+    # payments = generate_payments(5)
+    # save_payments_to_csv(payments)
+    deliveries = generate_deliveries(5)
+    save_deliveries_to_csv(deliveries)
