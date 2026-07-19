@@ -1,0 +1,51 @@
+store_id,store_name,address,region,opening_date,is_active
+1,Coffee Point #1,"101 Main Street, Amsterdam",North Holland,2018-01-18,True
+2,Coffee Point #2,"102 Main Street, Rotterdam",South Holland,2018-02-04,True
+3,Coffee Point #3,"103 Main Street, The Hague",South Holland,2018-02-21,True
+4,Coffee Point #4,"104 Main Street, Utrecht",Utrecht,2018-03-10,True
+5,Coffee Point #5,"105 Main Street, Eindhoven",North Brabant,2018-03-27,True
+6,Coffee Point #6,"106 Main Street, Groningen",Groningen,2018-04-13,True
+7,Coffee Point #7,"107 Main Street, Tilburg",North Brabant,2018-04-30,True
+8,Coffee Point #8,"108 Main Street, Almere",Flevoland,2018-05-17,True
+9,Coffee Point #9,"109 Main Street, Breda",North Brabant,2018-06-03,True
+10,Coffee Point #10,"110 Main Street, Nijmegen",Gelderland,2018-06-20,True
+11,Coffee Point #11,"111 Main Street, Amsterdam",North Holland,2018-07-07,True
+12,Coffee Point #12,"112 Main Street, Rotterdam",South Holland,2018-07-24,True
+13,Coffee Point #13,"113 Main Street, The Hague",South Holland,2018-08-10,True
+14,Coffee Point #14,"114 Main Street, Utrecht",Utrecht,2018-08-27,True
+15,Coffee Point #15,"115 Main Street, Eindhoven",North Brabant,2018-09-13,True
+16,Coffee Point #16,"116 Main Street, Groningen",Groningen,2018-09-30,True
+17,Coffee Point #17,"117 Main Street, Tilburg",North Brabant,2018-10-17,True
+18,Coffee Point #18,"118 Main Street, Almere",Flevoland,2018-11-03,True
+19,Coffee Point #19,"119 Main Street, Breda",North Brabant,2018-11-20,True
+20,Coffee Point #20,"120 Main Street, Nijmegen",Gelderland,2018-12-07,True
+21,Coffee Point #21,"121 Main Street, Amsterdam",North Holland,2018-12-24,True
+22,Coffee Point #22,"122 Main Street, Rotterdam",South Holland,2019-01-10,True
+23,Coffee Point #23,"123 Main Street, The Hague",South Holland,2019-01-27,True
+24,Coffee Point #24,"124 Main Street, Utrecht",Utrecht,2019-02-13,True
+25,Coffee Point #25,"125 Main Street, Eindhoven",North Brabant,2019-03-02,True
+26,Coffee Point #26,"126 Main Street, Groningen",Groningen,2019-03-19,True
+27,Coffee Point #27,"127 Main Street, Tilburg",North Brabant,2019-04-05,True
+28,Coffee Point #28,"128 Main Street, Almere",Flevoland,2019-04-22,True
+29,Coffee Point #29,"129 Main Street, Breda",North Brabant,2019-05-09,True
+30,Coffee Point #30,"130 Main Street, Nijmegen",Gelderland,2019-05-26,True
+31,Coffee Point #31,"131 Main Street, Amsterdam",North Holland,2019-06-12,True
+32,Coffee Point #32,"132 Main Street, Rotterdam",South Holland,2019-06-29,True
+33,Coffee Point #33,"133 Main Street, The Hague",South Holland,2019-07-16,True
+34,Coffee Point #34,"134 Main Street, Utrecht",Utrecht,2019-08-02,True
+35,Coffee Point #35,"135 Main Street, Eindhoven",North Brabant,2019-08-19,True
+36,Coffee Point #36,"136 Main Street, Groningen",Groningen,2019-09-05,True
+37,Coffee Point #37,"137 Main Street, Tilburg",North Brabant,2019-09-22,True
+38,Coffee Point #38,"138 Main Street, Almere",Flevoland,2019-10-09,True
+39,Coffee Point #39,"139 Main Street, Breda",North Brabant,2019-10-26,True
+40,Coffee Point #40,"140 Main Street, Nijmegen",Gelderland,2019-11-12,True
+41,Coffee Point #41,"141 Main Street, Amsterdam",North Holland,2019-11-29,True
+42,Coffee Point #42,"142 Main Street, Rotterdam",South Holland,2019-12-16,True
+43,Coffee Point #43,"143 Main Street, The Hague",South Holland,2020-01-02,True
+44,Coffee Point #44,"144 Main Street, Utrecht",Utrecht,2020-01-19,True
+45,Coffee Point #45,"145 Main Street, Eindhoven",North Brabant,2020-02-05,True
+46,Coffee Point #46,"146 Main Street, Groningen",Groningen,2020-02-22,True
+47,Coffee Point #47,"147 Main Street, Tilburg",North Brabant,2020-03-10,True
+48,Coffee Point #48,"148 Main Street, Almere",Flevoland,2020-03-27,True
+49,Coffee Point #49,"149 Main Street, Breda",North Brabant,2020-04-13,True
+50,Coffee Point #50,"150 Main Street, Nijmegen",Gelderland,2020-04-30,True

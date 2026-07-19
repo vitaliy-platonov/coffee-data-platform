@@ -1,0 +1,501 @@
+product_id,product_name,price,category_id,supplier_id
+1,Espresso 1,3.59,1,1
+2,Espresso 2,4.45,1,2
+3,Espresso 3,2.83,1,3
+4,Espresso 4,3.85,1,4
+5,Espresso 5,2.79,1,5
+6,Espresso 6,2.54,1,6
+7,Espresso 7,3.64,1,7
+8,Espresso 8,2.97,1,8
+9,Espresso 9,3.74,1,9
+10,Espresso 10,5.47,1,10
+11,Espresso 11,2.64,1,11
+12,Espresso 12,5.00,1,12
+13,Espresso 13,3.04,1,13
+14,Espresso 14,5.68,1,14
+15,Espresso 15,5.45,1,15
+16,Espresso 16,3.34,1,16
+17,Espresso 17,5.89,1,17
+18,Espresso 18,5.37,1,18
+19,Espresso 19,2.80,1,19
+20,Espresso 20,4.13,1,20
+21,Espresso 21,5.30,1,21
+22,Espresso 22,6.19,1,22
+23,Espresso 23,3.19,1,23
+24,Espresso 24,3.51,1,24
+25,Espresso 25,5.60,1,25
+26,Americano 1,6.35,2,26
+27,Americano 2,2.88,2,27
+28,Americano 3,2.86,2,28
+29,Americano 4,5.50,2,29
+30,Americano 5,3.77,2,30
+31,Americano 6,4.05,2,31
+32,Americano 7,6.01,2,32
+33,Americano 8,5.48,2,33
+34,Americano 9,5.14,2,34
+35,Americano 10,5.97,2,35
+36,Americano 11,5.43,2,36
+37,Americano 12,5.74,2,37
+38,Americano 13,5.07,2,38
+39,Americano 14,4.87,2,39
+40,Americano 15,2.74,2,40
+41,Americano 16,6.14,2,1
+42,Americano 17,6.15,2,2
+43,Americano 18,3.91,2,3
+44,Americano 19,5.01,2,4
+45,Americano 20,2.57,2,5
+46,Americano 21,4.50,2,6
+47,Americano 22,4.99,2,7
+48,Americano 23,3.68,2,8
+49,Americano 24,4.16,2,9
+50,Americano 25,5.84,2,10
+51,Cappuccino 1,3.07,3,11
+52,Cappuccino 2,4.32,3,12
+53,Cappuccino 3,2.85,3,13
+54,Cappuccino 4,4.04,3,14
+55,Cappuccino 5,6.03,3,15
+56,Cappuccino 6,4.95,3,16
+57,Cappuccino 7,2.62,3,17
+58,Cappuccino 8,5.93,3,18
+59,Cappuccino 9,5.13,3,19
+60,Cappuccino 10,4.58,3,20
+61,Cappuccino 11,3.65,3,21
+62,Cappuccino 12,3.70,3,22
+63,Cappuccino 13,3.23,3,23
+64,Cappuccino 14,4.99,3,24
+65,Cappuccino 15,2.70,3,25
+66,Cappuccino 16,6.28,3,26
+67,Cappuccino 17,2.91,3,27
+68,Cappuccino 18,5.00,3,28
+69,Cappuccino 19,4.80,3,29
+70,Cappuccino 20,3.95,3,30
+71,Cappuccino 21,3.61,3,31
+72,Cappuccino 22,4.26,3,32
+73,Cappuccino 23,3.82,3,33
+74,Cappuccino 24,6.39,3,34
+75,Cappuccino 25,5.08,3,35
+76,Latte 1,4.57,4,36
+77,Latte 2,5.15,4,37
+78,Latte 3,4.48,4,38
+79,Latte 4,3.09,4,39
+80,Latte 5,2.59,4,40
+81,Latte 6,6.38,4,1
+82,Latte 7,5.88,4,2
+83,Latte 8,2.88,4,3
+84,Latte 9,4.94,4,4
+85,Latte 10,5.64,4,5
+86,Latte 11,6.08,4,6
+87,Latte 12,2.76,4,7
+88,Latte 13,3.03,4,8
+89,Latte 14,4.07,4,9
+90,Latte 15,4.91,4,10
+91,Latte 16,2.83,4,11
+92,Latte 17,5.28,4,12
+93,Latte 18,5.52,4,13
+94,Latte 19,4.29,4,14
+95,Latte 20,5.90,4,15
+96,Latte 21,4.06,4,16
+97,Latte 22,5.83,4,17
+98,Latte 23,4.03,4,18
+99,Latte 24,4.11,4,19
+100,Latte 25,4.01,4,20
+101,Flat White 1,5.34,5,21
+102,Flat White 2,6.03,5,22
+103,Flat White 3,2.79,5,23
+104,Flat White 4,4.86,5,24
+105,Flat White 5,5.84,5,25
+106,Flat White 6,5.27,5,26
+107,Flat White 7,3.44,5,27
+108,Flat White 8,3.96,5,28
+109,Flat White 9,6.04,5,29
+110,Flat White 10,3.36,5,30
+111,Flat White 11,6.32,5,31
+112,Flat White 12,4.07,5,32
+113,Flat White 13,4.58,5,33
+114,Flat White 14,5.33,5,34
+115,Flat White 15,5.22,5,35
+116,Flat White 16,4.86,5,36
+117,Flat White 17,5.97,5,37
+118,Flat White 18,5.06,5,38
+119,Flat White 19,6.16,5,39
+120,Flat White 20,5.11,5,40
+121,Flat White 21,4.85,5,1
+122,Flat White 22,2.73,5,2
+123,Flat White 23,6.13,5,3
+124,Flat White 24,3.42,5,4
+125,Flat White 25,3.40,5,5
+126,Mocha 1,2.70,6,6
+127,Mocha 2,4.99,6,7
+128,Mocha 3,3.98,6,8
+129,Mocha 4,5.11,6,9
+130,Mocha 5,5.75,6,10
+131,Mocha 6,6.27,6,11
+132,Mocha 7,5.71,6,12
+133,Mocha 8,5.85,6,13
+134,Mocha 9,4.02,6,14
+135,Mocha 10,2.71,6,15
+136,Mocha 11,5.58,6,16
+137,Mocha 12,6.48,6,17
+138,Mocha 13,4.35,6,18
+139,Mocha 14,6.10,6,19
+140,Mocha 15,4.76,6,20
+141,Mocha 16,4.04,6,21
+142,Mocha 17,5.83,6,22
+143,Mocha 18,2.75,6,23
+144,Mocha 19,3.95,6,24
+145,Mocha 20,5.28,6,25
+146,Mocha 21,2.83,6,26
+147,Mocha 22,4.72,6,27
+148,Mocha 23,4.05,6,28
+149,Mocha 24,3.38,6,29
+150,Mocha 25,4.13,6,30
+151,Macchiato 1,5.47,7,31
+152,Macchiato 2,5.18,7,32
+153,Macchiato 3,4.87,7,33
+154,Macchiato 4,5.60,7,34
+155,Macchiato 5,4.14,7,35
+156,Macchiato 6,4.82,7,36
+157,Macchiato 7,2.90,7,37
+158,Macchiato 8,5.14,7,38
+159,Macchiato 9,5.17,7,39
+160,Macchiato 10,5.01,7,40
+161,Macchiato 11,5.69,7,1
+162,Macchiato 12,6.44,7,2
+163,Macchiato 13,5.39,7,3
+164,Macchiato 14,6.40,7,4
+165,Macchiato 15,5.12,7,5
+166,Macchiato 16,3.61,7,6
+167,Macchiato 17,5.96,7,7
+168,Macchiato 18,5.18,7,8
+169,Macchiato 19,5.01,7,9
+170,Macchiato 20,3.08,7,10
+171,Macchiato 21,4.76,7,11
+172,Macchiato 22,3.86,7,12
+173,Macchiato 23,4.81,7,13
+174,Macchiato 24,6.19,7,14
+175,Macchiato 25,4.03,7,15
+176,Filter Coffee 1,2.58,8,16
+177,Filter Coffee 2,2.99,8,17
+178,Filter Coffee 3,4.65,8,18
+179,Filter Coffee 4,5.87,8,19
+180,Filter Coffee 5,2.70,8,20
+181,Filter Coffee 6,4.15,8,21
+182,Filter Coffee 7,3.86,8,22
+183,Filter Coffee 8,4.27,8,23
+184,Filter Coffee 9,5.01,8,24
+185,Filter Coffee 10,4.51,8,25
+186,Filter Coffee 11,3.59,8,26
+187,Filter Coffee 12,5.98,8,27
+188,Filter Coffee 13,5.74,8,28
+189,Filter Coffee 14,6.09,8,29
+190,Filter Coffee 15,3.00,8,30
+191,Filter Coffee 16,4.64,8,31
+192,Filter Coffee 17,3.44,8,32
+193,Filter Coffee 18,2.89,8,33
+194,Filter Coffee 19,6.21,8,34
+195,Filter Coffee 20,5.14,8,35
+196,Filter Coffee 21,4.33,8,36
+197,Filter Coffee 22,5.56,8,37
+198,Filter Coffee 23,5.89,8,38
+199,Filter Coffee 24,4.36,8,39
+200,Filter Coffee 25,2.93,8,40
+201,Cold Coffee 1,6.11,9,1
+202,Cold Coffee 2,4.53,9,2
+203,Cold Coffee 3,4.17,9,3
+204,Cold Coffee 4,3.28,9,4
+205,Cold Coffee 5,4.58,9,5
+206,Cold Coffee 6,5.97,9,6
+207,Cold Coffee 7,6.23,9,7
+208,Cold Coffee 8,3.06,9,8
+209,Cold Coffee 9,2.98,9,9
+210,Cold Coffee 10,6.47,9,10
+211,Cold Coffee 11,4.59,9,11
+212,Cold Coffee 12,5.04,9,12
+213,Cold Coffee 13,5.28,9,13
+214,Cold Coffee 14,4.15,9,14
+215,Cold Coffee 15,4.08,9,15
+216,Cold Coffee 16,5.98,9,16
+217,Cold Coffee 17,4.99,9,17
+218,Cold Coffee 18,2.59,9,18
+219,Cold Coffee 19,2.65,9,19
+220,Cold Coffee 20,5.85,9,20
+221,Cold Coffee 21,4.87,9,21
+222,Cold Coffee 22,5.48,9,22
+223,Cold Coffee 23,4.50,9,23
+224,Cold Coffee 24,5.34,9,24
+225,Cold Coffee 25,3.89,9,25
+226,Tea 1,4.10,10,26
+227,Tea 2,4.03,10,27
+228,Tea 3,3.88,10,28
+229,Tea 4,5.85,10,29
+230,Tea 5,5.63,10,30
+231,Tea 6,4.64,10,31
+232,Tea 7,3.13,10,32
+233,Tea 8,5.78,10,33
+234,Tea 9,5.43,10,34
+235,Tea 10,4.91,10,35
+236,Tea 11,5.89,10,36
+237,Tea 12,5.27,10,37
+238,Tea 13,4.82,10,38
+239,Tea 14,4.01,10,39
+240,Tea 15,4.87,10,40
+241,Tea 16,4.27,10,1
+242,Tea 17,3.52,10,2
+243,Tea 18,3.49,10,3
+244,Tea 19,3.32,10,4
+245,Tea 20,5.05,10,5
+246,Tea 21,4.13,10,6
+247,Tea 22,5.96,10,7
+248,Tea 23,5.75,10,8
+249,Tea 24,3.85,10,9
+250,Tea 25,3.30,10,10
+251,Hot Chocolate 1,5.50,11,11
+252,Hot Chocolate 2,5.55,11,12
+253,Hot Chocolate 3,4.11,11,13
+254,Hot Chocolate 4,5.29,11,14
+255,Hot Chocolate 5,5.82,11,15
+256,Hot Chocolate 6,4.34,11,16
+257,Hot Chocolate 7,4.33,11,17
+258,Hot Chocolate 8,4.85,11,18
+259,Hot Chocolate 9,5.54,11,19
+260,Hot Chocolate 10,5.11,11,20
+261,Hot Chocolate 11,5.96,11,21
+262,Hot Chocolate 12,3.43,11,22
+263,Hot Chocolate 13,3.28,11,23
+264,Hot Chocolate 14,3.36,11,24
+265,Hot Chocolate 15,5.82,11,25
+266,Hot Chocolate 16,3.89,11,26
+267,Hot Chocolate 17,3.22,11,27
+268,Hot Chocolate 18,3.45,11,28
+269,Hot Chocolate 19,3.07,11,29
+270,Hot Chocolate 20,4.60,11,30
+271,Hot Chocolate 21,4.91,11,31
+272,Hot Chocolate 22,3.85,11,32
+273,Hot Chocolate 23,3.06,11,33
+274,Hot Chocolate 24,3.11,11,34
+275,Hot Chocolate 25,5.06,11,35
+276,Lemonades 1,3.00,12,36
+277,Lemonades 2,3.72,12,37
+278,Lemonades 3,4.35,12,38
+279,Lemonades 4,4.23,12,39
+280,Lemonades 5,5.80,12,40
+281,Lemonades 6,5.80,12,1
+282,Lemonades 7,4.50,12,2
+283,Lemonades 8,4.84,12,3
+284,Lemonades 9,4.07,12,4
+285,Lemonades 10,4.93,12,5
+286,Lemonades 11,3.17,12,6
+287,Lemonades 12,3.56,12,7
+288,Lemonades 13,5.47,12,8
+289,Lemonades 14,4.38,12,9
+290,Lemonades 15,4.48,12,10
+291,Lemonades 16,5.50,12,11
+292,Lemonades 17,4.96,12,12
+293,Lemonades 18,3.51,12,13
+294,Lemonades 19,4.40,12,14
+295,Lemonades 20,5.56,12,15
+296,Lemonades 21,4.05,12,16
+297,Lemonades 22,5.86,12,17
+298,Lemonades 23,3.58,12,18
+299,Lemonades 24,4.19,12,19
+300,Lemonades 25,3.57,12,20
+301,Smoothies 1,3.85,13,21
+302,Smoothies 2,3.66,13,22
+303,Smoothies 3,4.96,13,23
+304,Smoothies 4,5.25,13,24
+305,Smoothies 5,5.63,13,25
+306,Smoothies 6,3.42,13,26
+307,Smoothies 7,5.99,13,27
+308,Smoothies 8,5.06,13,28
+309,Smoothies 9,3.81,13,29
+310,Smoothies 10,5.02,13,30
+311,Smoothies 11,4.84,13,31
+312,Smoothies 12,4.06,13,32
+313,Smoothies 13,3.82,13,33
+314,Smoothies 14,3.26,13,34
+315,Smoothies 15,3.65,13,35
+316,Smoothies 16,5.57,13,36
+317,Smoothies 17,4.12,13,37
+318,Smoothies 18,4.96,13,38
+319,Smoothies 19,4.34,13,39
+320,Smoothies 20,3.71,13,40
+321,Smoothies 21,4.29,13,1
+322,Smoothies 22,3.67,13,2
+323,Smoothies 23,4.29,13,3
+324,Smoothies 24,3.58,13,4
+325,Smoothies 25,3.39,13,5
+326,Desserts 1,7.16,14,6
+327,Desserts 2,4.03,14,7
+328,Desserts 3,6.45,14,8
+329,Desserts 4,8.02,14,9
+330,Desserts 5,7.95,14,10
+331,Desserts 6,7.43,14,11
+332,Desserts 7,5.23,14,12
+333,Desserts 8,5.35,14,13
+334,Desserts 9,2.11,14,14
+335,Desserts 10,6.39,14,15
+336,Desserts 11,5.27,14,16
+337,Desserts 12,4.22,14,17
+338,Desserts 13,7.55,14,18
+339,Desserts 14,6.89,14,19
+340,Desserts 15,7.11,14,20
+341,Desserts 16,4.22,14,21
+342,Desserts 17,5.32,14,22
+343,Desserts 18,7.05,14,23
+344,Desserts 19,7.90,14,24
+345,Desserts 20,5.17,14,25
+346,Desserts 21,6.66,14,26
+347,Desserts 22,5.67,14,27
+348,Desserts 23,3.47,14,28
+349,Desserts 24,7.67,14,29
+350,Desserts 25,5.51,14,30
+351,Pastries 1,3.13,15,31
+352,Pastries 2,5.77,15,32
+353,Pastries 3,7.58,15,33
+354,Pastries 4,3.04,15,34
+355,Pastries 5,3.08,15,35
+356,Pastries 6,6.13,15,36
+357,Pastries 7,2.89,15,37
+358,Pastries 8,6.96,15,38
+359,Pastries 9,5.96,15,39
+360,Pastries 10,5.09,15,40
+361,Pastries 11,4.94,15,1
+362,Pastries 12,8.33,15,2
+363,Pastries 13,3.98,15,3
+364,Pastries 14,5.68,15,4
+365,Pastries 15,4.81,15,5
+366,Pastries 16,8.23,15,6
+367,Pastries 17,4.48,15,7
+368,Pastries 18,2.03,15,8
+369,Pastries 19,4.89,15,9
+370,Pastries 20,5.54,15,10
+371,Pastries 21,6.86,15,11
+372,Pastries 22,6.14,15,12
+373,Pastries 23,7.77,15,13
+374,Pastries 24,3.58,15,14
+375,Pastries 25,6.12,15,15
+376,Sandwiches 1,7.42,16,16
+377,Sandwiches 2,7.77,16,17
+378,Sandwiches 3,7.23,16,18
+379,Sandwiches 4,6.29,16,19
+380,Sandwiches 5,4.73,16,20
+381,Sandwiches 6,8.00,16,21
+382,Sandwiches 7,6.83,16,22
+383,Sandwiches 8,4.80,16,23
+384,Sandwiches 9,8.11,16,24
+385,Sandwiches 10,7.73,16,25
+386,Sandwiches 11,8.31,16,26
+387,Sandwiches 12,8.17,16,27
+388,Sandwiches 13,8.16,16,28
+389,Sandwiches 14,4.71,16,29
+390,Sandwiches 15,4.61,16,30
+391,Sandwiches 16,8.34,16,31
+392,Sandwiches 17,2.18,16,32
+393,Sandwiches 18,8.16,16,33
+394,Sandwiches 19,7.36,16,34
+395,Sandwiches 20,3.23,16,35
+396,Sandwiches 21,6.09,16,36
+397,Sandwiches 22,4.47,16,37
+398,Sandwiches 23,6.85,16,38
+399,Sandwiches 24,7.96,16,39
+400,Sandwiches 25,6.89,16,40
+401,Salads 1,7.47,17,1
+402,Salads 2,3.84,17,2
+403,Salads 3,5.25,17,3
+404,Salads 4,5.05,17,4
+405,Salads 5,8.10,17,5
+406,Salads 6,3.39,17,6
+407,Salads 7,6.68,17,7
+408,Salads 8,6.44,17,8
+409,Salads 9,4.27,17,9
+410,Salads 10,8.08,17,10
+411,Salads 11,7.85,17,11
+412,Salads 12,3.67,17,12
+413,Salads 13,4.11,17,13
+414,Salads 14,6.16,17,14
+415,Salads 15,2.85,17,15
+416,Salads 16,3.85,17,16
+417,Salads 17,2.75,17,17
+418,Salads 18,6.60,17,18
+419,Salads 19,5.19,17,19
+420,Salads 20,2.65,17,20
+421,Salads 21,7.44,17,21
+422,Salads 22,5.53,17,22
+423,Salads 23,6.27,17,23
+424,Salads 24,3.57,17,24
+425,Salads 25,6.43,17,25
+426,Snacks 1,4.19,18,26
+427,Snacks 2,8.37,18,27
+428,Snacks 3,2.44,18,28
+429,Snacks 4,2.30,18,29
+430,Snacks 5,4.53,18,30
+431,Snacks 6,2.87,18,31
+432,Snacks 7,2.88,18,32
+433,Snacks 8,6.92,18,33
+434,Snacks 9,5.56,18,34
+435,Snacks 10,6.52,18,35
+436,Snacks 11,3.13,18,36
+437,Snacks 12,6.17,18,37
+438,Snacks 13,7.01,18,38
+439,Snacks 14,2.55,18,39
+440,Snacks 15,3.14,18,40
+441,Snacks 16,4.98,18,1
+442,Snacks 17,4.12,18,2
+443,Snacks 18,7.50,18,3
+444,Snacks 19,5.63,18,4
+445,Snacks 20,5.05,18,5
+446,Snacks 21,4.54,18,6
+447,Snacks 22,3.09,18,7
+448,Snacks 23,3.22,18,8
+449,Snacks 24,3.78,18,9
+450,Snacks 25,2.08,18,10
+451,Coffee Beans 1,10.82,19,11
+452,Coffee Beans 2,17.99,19,12
+453,Coffee Beans 3,16.60,19,13
+454,Coffee Beans 4,16.46,19,14
+455,Coffee Beans 5,17.25,19,15
+456,Coffee Beans 6,17.79,19,16
+457,Coffee Beans 7,24.99,19,17
+458,Coffee Beans 8,16.86,19,18
+459,Coffee Beans 9,21.10,19,19
+460,Coffee Beans 10,13.14,19,20
+461,Coffee Beans 11,21.70,19,21
+462,Coffee Beans 12,17.08,19,22
+463,Coffee Beans 13,22.61,19,23
+464,Coffee Beans 14,24.28,19,24
+465,Coffee Beans 15,11.35,19,25
+466,Coffee Beans 16,23.16,19,26
+467,Coffee Beans 17,18.78,19,27
+468,Coffee Beans 18,23.20,19,28
+469,Coffee Beans 19,8.81,19,29
+470,Coffee Beans 20,22.27,19,30
+471,Coffee Beans 21,20.68,19,31
+472,Coffee Beans 22,22.53,19,32
+473,Coffee Beans 23,12.82,19,33
+474,Coffee Beans 24,13.51,19,34
+475,Coffee Beans 25,19.07,19,35
+476,Accessories 1,13.84,20,36
+477,Accessories 2,18.66,20,37
+478,Accessories 3,25.87,20,38
+479,Accessories 4,14.43,20,39
+480,Accessories 5,29.87,20,40
+481,Accessories 6,27.27,20,1
+482,Accessories 7,23.36,20,2
+483,Accessories 8,26.37,20,3
+484,Accessories 9,5.44,20,4
+485,Accessories 10,20.57,20,5
+486,Accessories 11,27.66,20,6
+487,Accessories 12,13.52,20,7
+488,Accessories 13,20.13,20,8
+489,Accessories 14,7.45,20,9
+490,Accessories 15,23.99,20,10
+491,Accessories 16,10.52,20,11
+492,Accessories 17,29.54,20,12
+493,Accessories 18,20.25,20,13
+494,Accessories 19,6.27,20,14
+495,Accessories 20,18.34,20,15
+496,Accessories 21,8.14,20,16
+497,Accessories 22,13.11,20,17
+498,Accessories 23,21.73,20,18
+499,Accessories 24,7.09,20,19
+500,Accessories 25,25.74,20,20
