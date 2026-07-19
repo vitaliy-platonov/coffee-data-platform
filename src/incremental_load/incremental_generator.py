@@ -406,24 +406,3 @@ def generate_deliveries(count):
         }
         deliveries.append(delivery)
     return deliveries
-
-
-def generate_incremental_data():
-    generate_customers()
-    generate_orders()
-
-
-
-
-
-if __name__ == "__main__":
-    # customer = generate_customers(3)
-    # save_customers_to_csv(customer)
-    # orders = generate_orders(5)
-    # save_orders_to_csv(orders)
-    # order_items = generate_order_items(5)
-    # save_order_items_to_csv(order_items)
-    # payments = generate_payments(5)
-    # save_payments_to_csv(payments)
-    deliveries = generate_deliveries(5)
-    save_deliveries_to_csv(deliveries)
