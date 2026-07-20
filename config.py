@@ -12,3 +12,4 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 INITIAL_DATA_DIR = r"C:\Users\vital\OneDrive\Рабочий стол\coffee-data-platform\data\initial"
 INCREMENTAL_DATA_DIR = r"C:\Users\vital\OneDrive\Рабочий стол\coffee-data-platform\data\incremental"
+RAW_DATA_DIR = r"C:\Users\vital\OneDrive\Рабочий стол\coffee-data-platform\data\raw"
