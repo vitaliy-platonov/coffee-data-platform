@@ -1,8 +1,10 @@
 
-
 import logging
-import pandas as pd
 import os
+
+import pandas as pd
+import psycopg
+
 from config import RAW_DATA_DIR
 from database import get_connection
 
@@ -15,11 +17,14 @@ file_path = os.path.join(
 def load_payments():
     cursor = None
     conn = None
+
     try:
         conn = get_connection()
         cursor = conn.cursor()
 
         df =pd.read_csv(file_path, encoding='utf-8')
+        logging.info(f"Loaded {len(df)} payments from {file_path}")
+
         cursor.execute("""
         TRUNCATE TABLE staging.payments CASCADE;""")
 

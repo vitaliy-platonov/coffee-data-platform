@@ -1,8 +1,10 @@
 
-import psycopg
 import logging
 import os
+
 import pandas as pd
+import psycopg
+
 from config import RAW_DATA_DIR
 from database import get_connection
 
@@ -21,6 +23,7 @@ def load_stores():
         cursor = conn.cursor()
 
         df = pd.read_csv(file_path, encoding='utf-8')
+        logging.info(f"Loaded {len(df)} stores from {file_path}")
 
         cursor.execute("""
         TRUNCATE TABLE staging.stores CASCADE;""")

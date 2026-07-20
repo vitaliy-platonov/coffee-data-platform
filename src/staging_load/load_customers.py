@@ -1,7 +1,10 @@
 
-import pandas as pd
 import logging
 import os
+
+import pandas as pd
+import psycopg
+
 from config import RAW_DATA_DIR
 from database import get_connection
 
@@ -15,6 +18,7 @@ file_path = os.path.join(
 def load_customers():
     cursor = None
     conn = None
+
     try:
         conn = get_connection()
         cursor = conn.cursor()

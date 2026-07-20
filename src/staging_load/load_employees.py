@@ -1,8 +1,10 @@
 
-import pandas as pd
 import logging
 import os
+
+import pandas as pd
 import psycopg
+
 from config import RAW_DATA_DIR
 from database import get_connection
 
@@ -15,11 +17,14 @@ file_path = os.path.join(
 def load_employees():
     cursor = None
     conn = None
+
     try:
         conn = get_connection()
         cursor = conn.cursor()
 
         df = pd.read_csv(file_path,encoding='utf-8')
+        logging.info(f"Loaded {len(df)} employees from {file_path}")
+
         cursor.execute("""
         TRUNCATE TABLE staging.employees CASCADE;""")
 
@@ -45,7 +50,7 @@ def load_employees():
                            row["store_id"]))
         conn.commit()
     except Exception as error:
-        logging.info(error)
+        logging.error(error)
     finally:
         if cursor:
             cursor.close()

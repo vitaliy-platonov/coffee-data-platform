@@ -1,10 +1,12 @@
 
 import logging
-import pandas as pd
 import os
+
+import pandas as pd
 import psycopg
-from database import get_connection
+
 from config import RAW_DATA_DIR
+from database import get_connection
 
 file_path = os.path.join(
     RAW_DATA_DIR,
@@ -15,6 +17,7 @@ file_path = os.path.join(
 def load_categories():
     cursor = None
     conn = None
+
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -36,7 +39,7 @@ def load_categories():
 
         conn.commit()
     except Exception as error:
-        logging.info(error)
+        logging.error(error)
     finally:
         if cursor:
             cursor.close()

@@ -1,11 +1,12 @@
 
-
-from database import get_connection
 import logging
-from config import RAW_DATA_DIR
 import os
-import psycopg
+
 import pandas as pd
+import psycopg
+
+from config import RAW_DATA_DIR
+from database import get_connection
 
 file_path = os.path.join(
     RAW_DATA_DIR,
@@ -16,11 +17,14 @@ file_path = os.path.join(
 def load_products():
     cursor = None
     conn = None
+
     try:
         conn = get_connection()
         cursor = conn.cursor()
 
         df = pd.read_csv(file_path, encoding='utf-8')
+        logging.info(f"Loaded {len(df)} products from {file_path}")
+
         cursor.execute("""
         TRUNCATE TABLE staging.products CASCADE;""")
 

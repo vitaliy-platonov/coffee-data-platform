@@ -1,8 +1,10 @@
 
 import logging
 import os
-import psycopg
+
 import pandas as pd
+import psycopg
+
 from config import RAW_DATA_DIR
 from database import get_connection
 
