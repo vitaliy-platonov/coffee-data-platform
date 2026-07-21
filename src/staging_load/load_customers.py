@@ -35,17 +35,53 @@ def load_customers():
         loaded_rows = 0
         skipped_rows = 0
 
+        seen_customer_ids = set()
+
         for _, row in df.iterrows():
 
             customer_id = row["customer_id"]
+            if customer_id in seen_customer_ids:
+                logging.warning(
+                    f"Customer {customer_id}: duplicate customer_id in CSV"
+                )
+                skipped_rows += 1
+                continue
 
-            first_name = row["first_name"].strip()
-            last_name = row["last_name"].strip()
-            phone = row["phone"].strip()
-            email = row["email"].strip().lower()
-            city = row["city"].strip()
+            first_name = row["first_name"]
+            if pd.isna(first_name):
+                first_name = ""
+            else:
+                first_name = str(first_name).strip()
+
+            last_name = row["last_name"]
+            if pd.isna(last_name):
+                last_name = ""
+            else:
+                last_name = str(last_name).strip()
+
+            phone = row["phone"]
+            if pd.isna(phone):
+                phone = ""
+            else:
+                phone = str(phone).strip()
+
+            email = row["email"]
+            if pd.isna(email):
+                email = ""
+            else:
+                email = str(email).strip().lower()
+
+            city = row["city"]
+            if pd.isna(city):
+                city = ""
+            else:
+                city = str(city).strip()
 
             registration_date = row["registration_date"]
+            if pd.isna(registration_date):
+                registration_date = ""
+            else:
+                registration_date = str(registration_date).strip()
 
             try:
                 registration_date = datetime.strptime(
@@ -151,6 +187,7 @@ def load_customers():
             ))
 
             loaded_rows += 1
+            seen_customer_ids.add(customer_id)
 
         conn.commit()
 
