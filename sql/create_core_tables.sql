@@ -63,6 +63,8 @@ CREATE TABLE core.dim_products (
 	FOREIGN KEY (supplier_key)
 		REFERENCES core.dim_suppliers(supplier_key),
 
+    price DECIMAL(10,2) NOT NULL CHECK (price >= 0),
+
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
