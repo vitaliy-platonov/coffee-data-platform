@@ -13,3 +13,17 @@ CREATE TABLE marts.sales_mart
 
     PRIMARY KEY (sale_date, store_id)
 );
+
+
+CREATE TABLE marts.customer_mart
+(
+    customer_id INTEGER PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    registration_date DATE NOT NULL,
+
+    order_count INTEGER NOT NULL,
+    total_spent NUMERIC(12,2) NOT NULL,
+    average_check NUMERIC(10,2) NOT NULL
+);
