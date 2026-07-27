@@ -23,7 +23,18 @@ CREATE TABLE marts.customer_mart
     city VARCHAR(100) NOT NULL,
     registration_date DATE NOT NULL,
 
-    order_count INTEGER NOT NULL,
+    orders_count INTEGER NOT NULL,
     total_spent NUMERIC(12,2) NOT NULL,
     average_check NUMERIC(10,2) NOT NULL
+);
+
+CREATE TABLE marts.product_mart
+(
+    product_id INTEGER PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    category_name VARCHAR(100) NOT NULL,
+
+    orders_count INTEGER NOT NULL,
+    quantity_sold INTEGER NOT NULL,
+    total_revenue DECIMAL(12,2) NOT NULL
 );
