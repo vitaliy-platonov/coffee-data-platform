@@ -38,3 +38,19 @@ CREATE TABLE marts.product_mart
     quantity_sold INTEGER NOT NULL,
     total_revenue DECIMAL(12,2) NOT NULL
 );
+
+
+
+CREATE TABLE marts.store_mart
+(
+    store_id INTEGER PRIMARY KEY,
+    store_name VARCHAR(100) NOT NULL,
+    region VARCHAR(100) NOT NULL,
+
+    orders_count INTEGER NOT NULL,
+    customers_count INTEGER NOT NULL,
+    total_revenue NUMERIC(12,2) NOT NULL,
+    average_check NUMERIC(10,2) NOT NULL
+);
+
+
