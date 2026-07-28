@@ -1,9 +1,18 @@
 
-from database import get_connection
 import logging
+
 import logging_config
 
-def load_suppliers():
+from database import get_connection
+
+LOGGER = logging.getLogger(__name__)
+
+
+def load_suppliers() -> None:
+    """
+    Load suppliers from staging into core.dim_suppliers.
+    """
+
     cursor = None
     conn = None
 
@@ -14,57 +23,86 @@ def load_suppliers():
         inserted = 0
         updated = 0
 
-        cursor.execute("""
-        SELECT
-            supplier_id,
-            supplier_name,
-            is_active
-        FROM staging.suppliers;""")
+        cursor.execute(
+            """
+            SELECT
+                supplier_id,
+                supplier_name,
+                is_active
+            FROM staging.suppliers;
+            """
+        )
 
         rows = cursor.fetchall()
-        logging.info(
+        LOGGER.info(
             f"Loaded {len(rows)} staging suppliers"
         )
 
         for row in rows:
-            cursor.execute("""
-            SELECT
-                supplier_key
-            FROM core.dim_suppliers
-            WHERE supplier_id = %s;""",
-                           (row[0],))
+            cursor.execute(
+                """
+                SELECT
+                    supplier_key
+                FROM core.dim_suppliers
+                WHERE supplier_id = %s;
+                """,
+                    (
+                        row[0],
+                    ),
+            )
 
             result = cursor.fetchone()
 
             if result is None:
-                cursor.execute("""
-                INSERT INTO core.dim_suppliers 
-                (supplier_id, supplier_name, is_active)
-                VALUES (%s, %s, %s);""",
-                               (row[0], row[1], row[2]))
+                cursor.execute(
+                    """
+                    INSERT INTO core.dim_suppliers (
+                        supplier_id,
+                        supplier_name,
+                        is_active
+                    )
+                    VALUES (%s, %s, %s);
+                    """,
+                        (
+                            row[0],
+                            row[1],
+                            row[2],
+                        ),
+                )
+
                 inserted += 1
 
             else:
-                cursor.execute("""
-                UPDATE core.dim_suppliers
-                SET supplier_name = %s, 
-                is_active = %s,
-                updated_at = CURRENT_TIMESTAMP
-                WHERE supplier_id = %s;""",
-                               (
-                                   row[1],
-                                   row[2],
-                                   row[0]
-                               )
-                               )
+                cursor.execute(
+                    """
+                    UPDATE core.dim_suppliers
+                    SET 
+                        supplier_name = %s, 
+                        is_active = %s,
+                        updated_at = CURRENT_TIMESTAMP
+                    WHERE supplier_id = %s;
+                    """,
+                       (
+                           row[1],
+                           row[2],
+                           row[0],
+                       ),
+
+                    )
 
                 updated += 1
 
         conn.commit()
-        logging.info(f"Inserted: {inserted}")
-        logging.info(f"Updated: {updated}")
+        LOGGER.info(
+            f"Inserted: {inserted}"
+        )
+        LOGGER.info(
+            f"Updated: {updated}"
+        )
     except Exception:
-        logging.exception("Load_suppliers failed")
+        LOGGER.exception(
+            "Failed to load suppliers"
+        )
 
         if conn:
             conn.rollback()
@@ -74,5 +112,12 @@ def load_suppliers():
         if conn:
             conn.close()
 
-if __name__ == "__main__":
+
+def run() -> None:
+    """
+    Run the suppliers core loader.
+    """
     load_suppliers()
+
+if __name__ == "__main__":
+    run()
