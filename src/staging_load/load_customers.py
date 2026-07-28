@@ -1,18 +1,29 @@
 
-from datetime import datetime
 import logging
-
-import logging_config
+from pathlib import Path
 
 import pandas as pd
 
+import logging_config
 from config import RAW_DATA_DIR
 from database import get_connection
+from utils.dates import parse_date
+from utils.text import normalize_text
+from utils.constants import (
+    MAX_PHONE_LENGTH,
+    MAX_NAME_LENGTH,
+    MAX_EMAIL_LENGTH,
+    MAX_CITY_LENGTH,
+)
 
-file_path = RAW_DATA_DIR / "customers" / "customers.csv"
+LOGGER = logging.getLogger(__name__)
 
 
-def load_customers():
+def load_customers(file_path: Path) -> None:
+    """
+    Load customer data from CSV file into the staging.customers table.
+    """
+
     conn = None
     cursor = None
 
@@ -21,11 +32,13 @@ def load_customers():
         cursor = conn.cursor()
 
         df = pd.read_csv(file_path, encoding="utf-8")
-        logging.info(f"Loaded {len(df)} customers from {file_path}")
+        LOGGER.info(f"Loaded {len(df)} customers from {file_path}")
 
-        cursor.execute("""
+        cursor.execute(
+            """
             TRUNCATE TABLE staging.customers CASCADE;
-        """)
+            """
+        )
 
         loaded_rows = 0
         skipped_rows = 0
@@ -35,132 +48,107 @@ def load_customers():
         for _, row in df.iterrows():
 
             customer_id = row["customer_id"]
+
             if customer_id in seen_customer_ids:
-                logging.warning(
+                LOGGER.warning(
                     f"Customer {customer_id}: duplicate customer_id in CSV"
                 )
                 skipped_rows += 1
                 continue
 
-            first_name = row["first_name"]
-            if pd.isna(first_name):
-                first_name = ""
-            else:
-                first_name = str(first_name).strip()
+            first_name = normalize_text(row["first_name"])
 
-            last_name = row["last_name"]
-            if pd.isna(last_name):
-                last_name = ""
-            else:
-                last_name = str(last_name).strip()
+            last_name = normalize_text(row["last_name"])
 
-            phone = row["phone"]
-            if pd.isna(phone):
-                phone = ""
-            else:
-                phone = str(phone).strip()
+            phone = normalize_text(row["phone"])
 
-            email = row["email"]
-            if pd.isna(email):
-                email = ""
-            else:
-                email = str(email).strip().lower()
+            email = normalize_text(row["email"]).lower()
 
-            city = row["city"]
-            if pd.isna(city):
-                city = ""
-            else:
-                city = str(city).strip()
+            city = normalize_text(row["city"])
 
-            registration_date = row["registration_date"]
-            if pd.isna(registration_date):
-                registration_date = ""
-            else:
-                registration_date = str(registration_date).strip()
+            registration_date = normalize_text(row["registration_date"])
 
-            try:
-                registration_date = datetime.strptime(
-                    registration_date,
-                    "%Y-%m-%d"
-                ).date()
-            except ValueError:
-                logging.warning(
+            registration_date = parse_date(registration_date)
+
+            if registration_date is None:
+                LOGGER.warning(
                     f"Customer {customer_id}: invalid registration_date"
                 )
                 skipped_rows += 1
                 continue
 
             if not first_name:
-                logging.warning(
+                LOGGER.warning(
                     f"Customer {customer_id}: first_name is empty"
                 )
                 skipped_rows += 1
                 continue
 
             if not last_name:
-                logging.warning(
+                LOGGER.warning(
                     f"Customer {customer_id}: last_name is empty"
                 )
                 skipped_rows += 1
                 continue
 
             if not phone:
-                logging.warning(
+                LOGGER.warning(
                     f"Customer {customer_id}: phone is empty"
                 )
                 skipped_rows += 1
                 continue
 
             if not email:
-                logging.warning(
+                LOGGER.warning(
                     f"Customer {customer_id}: email is empty"
                 )
                 skipped_rows += 1
                 continue
 
             if not city:
-                logging.warning(
+                LOGGER.warning(
                     f"Customer {customer_id}: city is empty"
                 )
                 skipped_rows += 1
                 continue
 
-            if len(phone) > 20:
-                logging.warning(
+            if len(phone) > MAX_PHONE_LENGTH:
+                LOGGER.warning(
                     f"Customer {customer_id}: phone is longer than 20 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            if len(first_name) > 100:
-                logging.warning(
+            if len(first_name) > MAX_NAME_LENGTH:
+                LOGGER.warning(
                     f"Customer {customer_id}: first_name is longer than 100 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            if len(last_name) > 100:
-                logging.warning(
+            if len(last_name) > MAX_NAME_LENGTH:
+                LOGGER.warning(
                     f"Customer {customer_id}: last_name is longer than 100 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            if len(email) > 100:
-                logging.warning(
+            if len(email) > MAX_EMAIL_LENGTH:
+                LOGGER.warning(
                     f"Customer {customer_id}: email is longer than 100 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            if len(city) > 100:
-                logging.warning(
+            if len(city) > MAX_CITY_LENGTH:
+                LOGGER.warning(
                     f"Customer {customer_id}: city is longer than 100 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            cursor.execute("""
+            cursor.execute(
+                """
                 INSERT INTO staging.customers (
                     customer_id,
                     first_name,
@@ -171,27 +159,30 @@ def load_customers():
                     registration_date
                 )
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
-            """, (
-                customer_id,
-                first_name,
-                last_name,
-                phone,
-                email,
-                city,
-                registration_date
-            ))
+                """,
+                (
+                    customer_id,
+                    first_name,
+                    last_name,
+                    phone,
+                    email,
+                    city,
+                    registration_date,
+                ),
+            )
 
             loaded_rows += 1
             seen_customer_ids.add(customer_id)
 
         conn.commit()
 
-        logging.info(
+        LOGGER.info(
             f"Customers loaded: {loaded_rows}, skipped: {skipped_rows}"
         )
 
-    except Exception as error:
-        logging.exception(("Failed to load customers"))
+    except Exception:
+        LOGGER.exception("Failed to load customers")
+
         if conn:
             conn.rollback()
 
@@ -203,5 +194,13 @@ def load_customers():
             conn.close()
 
 
+def run() -> None:
+    """
+    Run the customers staging loader.
+    """
+    file_path = RAW_DATA_DIR / "customers" / "customers.csv"
+    load_customers(file_path)
+
+
 if __name__ == "__main__":
-    load_customers()
+    run()

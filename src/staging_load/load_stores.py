@@ -1,16 +1,22 @@
 
-from datetime import datetime
 import logging
-import logging_config
+from pathlib import Path
 
 import pandas as pd
 
+import logging_config
 from config import RAW_DATA_DIR
 from database import get_connection
+from utils.dates import parse_date
+from utils.text import normalize_text
 
-file_path = RAW_DATA_DIR / "stores" / "stores.csv"
+LOGGER = logging.getLogger(__name__)
 
-def load_stores():
+
+def load_stores(file_path: Path) -> None:
+    """
+    Load stores data from CSV file into the staging.stores table.
+    """
     cursor = None
     conn = None
 
@@ -18,157 +24,153 @@ def load_stores():
         conn = get_connection()
         cursor = conn.cursor()
 
-        df = pd.read_csv(file_path, encoding='utf-8')
-        logging.info(f"Loaded {len(df)} stores from {file_path}")
+        df = pd.read_csv(file_path, encoding="utf-8")
+        LOGGER.info(f"Loaded {len(df)} stores from {file_path}")
 
-        cursor.execute("""
-        TRUNCATE TABLE staging.stores CASCADE;""")
+        cursor.execute(
+            """
+            TRUNCATE TABLE staging.stores CASCADE;
+            """
+        )
 
         loaded_rows = 0
         skipped_rows = 0
+
         seen_store_ids = set()
 
         for _, row in df.iterrows():
 
-            store_id = row['store_id']
+            store_id = row["store_id"]
+
             if store_id in seen_store_ids:
-                logging.warning(
-                    f"Store {store_id} duplicate store_id in CSV"
+                LOGGER.warning(
+                    f"Store {store_id}: duplicate store_id in CSV"
                 )
                 skipped_rows += 1
                 continue
 
-            store_name = row['store_name']
-            if pd.isna(store_name):
-                store_name = ""
-            else:
-                store_name = str(store_name).strip()
+            store_name = normalize_text(row["store_name"])
 
             if not store_name:
-                logging.warning(
+                LOGGER.warning(
                     f"Store {store_id}: store_name is empty"
                 )
                 skipped_rows += 1
                 continue
 
             if len(store_name) > 50:
-                logging.warning(
+                LOGGER.warning(
                     f"Store {store_id}: store_name is longer than 50 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            address = row['address']
-            if pd.isna(address):
-                address = ""
-            else:
-                address = str(address).strip()
+            address = normalize_text(row["address"])
 
             if not address:
-                logging.warning(
+                LOGGER.warning(
                     f"Store {store_id}: address is empty"
                 )
                 skipped_rows += 1
                 continue
 
             if len(address) > 200:
-                logging.warning(
-                    f"Store {store_id}: address is longer than 200"
+                LOGGER.warning(
+                    f"Store {store_id}: address is longer than 200 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            region = row['region']
-            if pd.isna(region):
-                region = ""
-            else:
-                region = str(region).strip()
+            region = normalize_text(row["region"])
 
             if not region:
-                logging.warning(
+                LOGGER.warning(
                     f"Store {store_id}: region is empty"
                 )
                 skipped_rows += 1
                 continue
 
             if len(region) > 100:
-                logging.warning(
-                    f"Store {store_id}: region is longer than 100"
+                LOGGER.warning(
+                    f"Store {store_id}: region is longer than 100 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            opening_date = row['opening_date']
-            if pd.isna(opening_date):
-                opening_date = ""
-            else:
-                opening_date = str(opening_date).strip()
+            opening_date = parse_date(
+                normalize_text(row["opening_date"])
+            )
 
-            if not opening_date:
-                logging.warning(
-                    f"Store {store_id}: opening_date is empty"
-                )
-                skipped_rows += 1
-                continue
-
-            try:
-                opening_date = datetime.strptime(
-                    opening_date,
-                    "%Y-%m-%d"
-                ).date()
-            except ValueError:
-                logging.warning(
+            if opening_date is None:
+                LOGGER.warning(
                     f"Store {store_id}: invalid opening_date"
                 )
                 skipped_rows += 1
                 continue
 
-            is_active = row['is_active']
-            if pd.isna(is_active):
-                is_active = ""
-            else:
-                is_active = str(is_active).strip().lower()
+            is_active = normalize_text(
+                row["is_active"]
+            ).lower()
 
             if not is_active:
-                logging.warning(
+                LOGGER.warning(
                     f"Store {store_id}: is_active is empty"
                 )
                 skipped_rows += 1
                 continue
 
-            cursor.execute("""
-            INSERT INTO staging.stores (
-                store_id,
-                store_name,
-                address,
-                region,
-                opening_date,
-                is_active)
-            VALUES (%s, %s, %s, %s, %s, %s)
-            """,
-                           (store_id,
-                            store_name,
-                            address,
-                            region,
-                            opening_date,
-                            is_active
-                           ))
+            cursor.execute(
+                """
+                INSERT INTO staging.stores (
+                    store_id,
+                    store_name,
+                    address,
+                    region,
+                    opening_date,
+                    is_active
+                )
+                VALUES (%s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    store_id,
+                    store_name,
+                    address,
+                    region,
+                    opening_date,
+                    is_active,
+                ),
+            )
+
             loaded_rows += 1
             seen_store_ids.add(store_id)
 
         conn.commit()
-        logging.info(
+
+        LOGGER.info(
             f"Stores loaded: {loaded_rows}, skipped: {skipped_rows}"
         )
+
     except Exception:
-        logging.exception("Failed to load stores")
+        LOGGER.exception("Failed to load stores")
 
         if conn:
             conn.rollback()
+
     finally:
         if cursor:
             cursor.close()
+
         if conn:
             conn.close()
-if __name__ == '__main__':
-    load_stores()
+
+
+def run() -> None:
+    """
+    Run the stores staging loader.
+    """
+    file_path = RAW_DATA_DIR / "stores" / "stores.csv"
+    load_stores(file_path)
+
+
+if __name__ == "__main__":
+    run()

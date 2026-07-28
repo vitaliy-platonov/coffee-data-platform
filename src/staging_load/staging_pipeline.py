@@ -1,53 +1,59 @@
 
 import logging
+
 import logging_config
 
-from load_categories import load_categories
-from load_suppliers import load_suppliers
-from load_stores import load_stores
-from load_customers import load_customers
-from load_products import load_products
-from load_employees import load_employees
-from load_orders import load_orders
-from load_order_items import load_order_items
-from load_payments import load_payments
-from load_deliveries import load_deliveries
+from load_categories import run as run_categories
+from load_suppliers import run as run_suppliers
+from load_stores import run as run_stores
+from load_customers import run as run_customers
+from load_products import run as run_products
+from load_employees import run as run_employees
+from load_orders import run as run_orders
+from load_order_items import run as run_order_items
+from load_payments import run as run_payments
+from load_deliveries import run as run_deliveries
+
+LOGGER = logging.getLogger(__name__)
 
 
 def run_staging_load() -> None:
-    logging.info("STAGING load started")
+    """
+    Run all staging loaders.
+    """
+    LOGGER.info("STAGING load started")
 
-    logging.info("Loading categories...")
-    load_categories()
+    LOGGER.info("Loading categories...")
+    run_categories()
 
-    logging.info("Loading suppliers...")
-    load_suppliers()
+    LOGGER.info("Loading suppliers...")
+    run_suppliers()
 
-    logging.info("Loading stores...")
-    load_stores()
+    LOGGER.info("Loading stores...")
+    run_stores()
 
-    logging.info("Loading customers...")
-    load_customers()
+    LOGGER.info("Loading customers...")
+    run_customers()
 
-    logging.info("Loading products...")
-    load_products()
+    LOGGER.info("Loading products...")
+    run_products()
 
-    logging.info("Loading employees...")
-    load_employees()
+    LOGGER.info("Loading employees...")
+    run_employees()
 
-    logging.info("Loading orders...")
-    load_orders()
+    LOGGER.info("Loading orders...")
+    run_orders()
 
-    logging.info("Loading order items...")
-    load_order_items()
+    LOGGER.info("Loading order items...")
+    run_order_items()
 
-    logging.info("Loading payments...")
-    load_payments()
+    LOGGER.info("Loading payments...")
+    run_payments()
 
-    logging.info("Loading deliveries...")
-    load_deliveries()
+    LOGGER.info("Loading deliveries...")
+    run_deliveries()
 
-    logging.info("STAGING load completed successfully")
+    LOGGER.info("STAGING load completed successfully")
 
 
 if __name__ == "__main__":

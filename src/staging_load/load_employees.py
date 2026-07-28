@@ -1,16 +1,23 @@
 
-from datetime import datetime
 import logging
-import logging_config
+from pathlib import Path
 
 import pandas as pd
 
+import logging_config
 from config import RAW_DATA_DIR
 from database import get_connection
+from utils.constants import MAX_NAME_LENGTH
+from utils.dates import parse_date
+from utils.text import normalize_text
 
-file_path = RAW_DATA_DIR / "employees" / "employees.csv"
+LOGGER = logging.getLogger(__name__)
 
-def load_employees():
+
+def load_employees(file_path: Path) -> None:
+    """
+    Load employees data from CSV file into the staging.employees table.
+    """
     cursor = None
     conn = None
 
@@ -18,171 +25,159 @@ def load_employees():
         conn = get_connection()
         cursor = conn.cursor()
 
-        df = pd.read_csv(file_path,encoding='utf-8')
-        logging.info(f"Loaded {len(df)} employees from {file_path}")
+        df = pd.read_csv(file_path, encoding="utf-8")
+        LOGGER.info(f"Loaded {len(df)} employees from {file_path}")
 
-        cursor.execute("""
-        TRUNCATE TABLE staging.employees CASCADE;""")
+        cursor.execute(
+            """
+            TRUNCATE TABLE staging.employees CASCADE;
+            """
+        )
 
         loaded_rows = 0
         skipped_rows = 0
+
         seen_employee_ids = set()
 
         for _, row in df.iterrows():
 
-            employee_id = row['employee_id']
+            employee_id = row["employee_id"]
+
             if employee_id in seen_employee_ids:
-                logging.warning(
+                LOGGER.warning(
                     f"Employee {employee_id}: duplicate employee_id in CSV"
                 )
                 skipped_rows += 1
                 continue
 
-            first_name = row['first_name']
-            if pd.isna(first_name):
-                first_name = ""
-            else:
-                first_name = str(first_name).strip()
+            first_name = normalize_text(row["first_name"])
 
             if not first_name:
-                logging.warning(
+                LOGGER.warning(
                     f"Employee {employee_id}: first_name is empty"
                 )
                 skipped_rows += 1
                 continue
 
-            if len(first_name) > 100:
-                logging.warning(
+            if len(first_name) > MAX_NAME_LENGTH:
+                LOGGER.warning(
                     f"Employee {employee_id}: first_name is longer than 100 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            last_name = row['last_name']
-            if pd.isna(last_name):
-                last_name = ""
-            else:
-                last_name = str(last_name).strip()
+            last_name = normalize_text(row["last_name"])
 
             if not last_name:
-                logging.warning(
+                LOGGER.warning(
                     f"Employee {employee_id}: last_name is empty"
                 )
                 skipped_rows += 1
                 continue
 
-            if len(last_name) > 50:
-                logging.warning(
-                    f"Employee {employee_id}: last_name longer than 50 characters"
+            if len(last_name) > MAX_NAME_LENGTH:
+                LOGGER.warning(
+                    f"Employee {employee_id}: last_name is longer than 100 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            hire_date = row['hire_date']
-            if pd.isna(hire_date):
-                hire_date = ""
-            else:
-                hire_date = str(hire_date).strip()
+            hire_date = parse_date(
+                normalize_text(row["hire_date"])
+            )
 
-            try:
-                hire_date = datetime.strptime(
-                    hire_date,
-                    "%Y-%m-%d"
-                ).date()
-            except ValueError:
-                logging.warning(
-                    f"Employee {employee_id}: invalid hire date"
+            if hire_date is None:
+                LOGGER.warning(
+                    f"Employee {employee_id}: invalid hire_date"
                 )
                 skipped_rows += 1
                 continue
 
-
-            salary = row['salary']
-            if pd.isna(salary):
-                salary = 0
-            else:
-                salary = float(salary)
-
+            salary = float(row["salary"])
 
             if salary < 0:
-                logging.warning(
+                LOGGER.warning(
                     f"Employee {employee_id}: salary is negative"
                 )
                 skipped_rows += 1
                 continue
 
-            is_active = row['is_active']
-            if pd.isna(is_active):
-                is_active = ""
-            else:
-                is_active = str(is_active).strip()
+            is_active = row["is_active"]
 
-            if not is_active:
-                logging.warning(
-                    f"Employee {employee_id}: is_active is empty"
-                )
-                skipped_rows += 1
-                continue
-
-            position = row['position']
-            if pd.isna(position):
-                position = ""
-            else:
-                position = str(position).strip()
+            position = normalize_text(row["position"])
 
             if not position:
-                logging.warning(
+                LOGGER.warning(
                     f"Employee {employee_id}: position is empty"
                 )
                 skipped_rows += 1
                 continue
 
             if len(position) > 50:
-                logging.warning(
+                LOGGER.warning(
                     f"Employee {employee_id}: position is longer than 50 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            store_id = int(row['store_id'])
+            store_id = int(row["store_id"])
 
-            cursor.execute("""
-            INSERT INTO staging.employees (
-                employee_id,
-                first_name,
-                last_name,
-                hire_date,
-                salary,
-                position,
-                is_active,
-                store_id)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s);""",
-                           (employee_id,
-                            first_name,
-                            last_name,
-                            hire_date,
-                            salary,
-                            position,
-                            is_active,
-                            store_id
-                            ))
+            cursor.execute(
+                """
+                INSERT INTO staging.employees (
+                    employee_id,
+                    first_name,
+                    last_name,
+                    hire_date,
+                    salary,
+                    position,
+                    is_active,
+                    store_id
+                )
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    employee_id,
+                    first_name,
+                    last_name,
+                    hire_date,
+                    salary,
+                    position,
+                    is_active,
+                    store_id,
+                ),
+            )
+
             loaded_rows += 1
             seen_employee_ids.add(employee_id)
 
         conn.commit()
-        logging.info(
-            f"Employees loaded: {loaded_rows}, skipped: {skipped_rows} "
+
+        LOGGER.info(
+            f"Employees loaded: {loaded_rows}, skipped: {skipped_rows}"
         )
+
     except Exception:
-        logging.exception("Failed to load employees")
+        LOGGER.exception("Failed to load employees")
 
         if conn:
             conn.rollback()
+
     finally:
         if cursor:
             cursor.close()
+
         if conn:
             conn.close()
 
+
+def run() -> None:
+    """
+    Run the employees staging loader.
+    """
+    file_path = RAW_DATA_DIR / "employees" / "employees.csv"
+    load_employees(file_path)
+
+
 if __name__ == "__main__":
-    load_employees()
+    run()

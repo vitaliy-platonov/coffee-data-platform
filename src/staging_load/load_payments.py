@@ -1,16 +1,22 @@
 
-from datetime import datetime
 import logging
-import logging_config
+from pathlib import Path
 
 import pandas as pd
 
+import logging_config
 from config import RAW_DATA_DIR
 from database import get_connection
+from utils.dates import parse_date
+from utils.text import normalize_text
 
-file_path = RAW_DATA_DIR / "payments" / "payments.csv"
+LOGGER = logging.getLogger(__name__)
 
-def load_payments():
+
+def load_payments(file_path: Path) -> None:
+    """
+    Load payments data from CSV file into the staging.payments table.
+    """
     cursor = None
     conn = None
 
@@ -18,21 +24,26 @@ def load_payments():
         conn = get_connection()
         cursor = conn.cursor()
 
-        df =pd.read_csv(file_path, encoding='utf-8')
-        logging.info(f"Loaded {len(df)} payments from {file_path}")
+        df = pd.read_csv(file_path, encoding="utf-8")
+        LOGGER.info(f"Loaded {len(df)} payments from {file_path}")
 
-        cursor.execute("""
-        TRUNCATE TABLE staging.payments CASCADE;""")
+        cursor.execute(
+            """
+            TRUNCATE TABLE staging.payments CASCADE;
+            """
+        )
 
         loaded_rows = 0
         skipped_rows = 0
+
         seen_payment_ids = set()
 
         for _, row in df.iterrows():
 
             payment_id = row["payment_id"]
+
             if payment_id in seen_payment_ids:
-                logging.warning(
+                LOGGER.warning(
                     f"Payment {payment_id}: duplicate payment_id in CSV"
                 )
                 skipped_rows += 1
@@ -40,78 +51,67 @@ def load_payments():
 
             order_id = int(row["order_id"])
 
-            payment_date = row["payment_date"]
-            if pd.isna(payment_date):
-                payment_date = ""
-            else:
-                payment_date = str(payment_date).strip()
+            payment_date = parse_date(
+                normalize_text(row["payment_date"])
+            )
 
-            try:
-                payment_date = datetime.strptime(
-                    payment_date,
-                    "%Y-%m-%d"
-                ).date()
-            except ValueError:
-                logging.warning(
+            if payment_date is None:
+                LOGGER.warning(
                     f"Payment {payment_id}: invalid payment_date"
                 )
                 skipped_rows += 1
                 continue
 
-            payment_method = row["payment_method"]
-            if pd.isna(payment_method):
-                payment_method = ""
-            else:
-                payment_method = str(payment_method).strip()
+            payment_method = normalize_text(
+                row["payment_method"]
+            )
 
             if not payment_method:
-                logging.warning(
+                LOGGER.warning(
                     f"Payment {payment_id}: payment_method is empty"
                 )
                 skipped_rows += 1
                 continue
 
             if len(payment_method) > 20:
-                logging.warning(
+                LOGGER.warning(
                     f"Payment {payment_id}: payment_method is longer than 20 characters"
                 )
                 skipped_rows += 1
                 continue
 
             amount = row["amount"]
+
             if pd.isna(amount):
                 amount = 0
             else:
                 amount = float(amount)
 
             if amount <= 0:
-                logging.warning(
+                LOGGER.warning(
                     f"Payment {payment_id}: amount must be greater than 0"
                 )
                 skipped_rows += 1
                 continue
 
-            status = row["status"]
-            if pd.isna(status):
-                status = ""
-            else:
-                status = str(status).strip()
+            status = normalize_text(row["status"])
 
             if not status:
-                logging.warning(
+                LOGGER.warning(
                     f"Payment {payment_id}: status is empty"
                 )
                 skipped_rows += 1
                 continue
 
             if len(status) > 20:
-                logging.warning(
+                LOGGER.warning(
                     f"Payment {payment_id}: status is longer than 20 characters"
                 )
                 skipped_rows += 1
                 continue
 
-            cursor.execute("""
+            cursor.execute(
+                """
                 INSERT INTO staging.payments (
                     payment_id,
                     order_id,
@@ -121,26 +121,28 @@ def load_payments():
                     status
                 )
                 VALUES (%s, %s, %s, %s, %s, %s)
-            """, (
-                payment_id,
-                order_id,
-                payment_date,
-                payment_method,
-                amount,
-                status
-            ))
+                """,
+                (
+                    payment_id,
+                    order_id,
+                    payment_date,
+                    payment_method,
+                    amount,
+                    status,
+                ),
+            )
 
             loaded_rows += 1
             seen_payment_ids.add(payment_id)
 
         conn.commit()
 
-        logging.info(
+        LOGGER.info(
             f"Payments loaded: {loaded_rows}, skipped: {skipped_rows}"
         )
 
     except Exception:
-        logging.exception("Failed to load payments")
+        LOGGER.exception("Failed to load payments")
 
         if conn:
             conn.rollback()
@@ -148,9 +150,18 @@ def load_payments():
     finally:
         if cursor:
             cursor.close()
+
         if conn:
             conn.close()
 
 
+def run() -> None:
+    """
+    Run the payments staging loader.
+    """
+    file_path = RAW_DATA_DIR / "payments" / "payments.csv"
+    load_payments(file_path)
+
+
 if __name__ == "__main__":
-    load_payments()
+    run()
