@@ -2,7 +2,6 @@
 import random
 from config import INCREMENTAL_DATA_DIR
 import csv
-import os
 from faker import Faker
 from database import get_connection
 
@@ -207,8 +206,7 @@ def generate_order_items(count):
 
 
 def save_customers_to_csv(customers):
-    file_path = os.path.join(INCREMENTAL_DATA_DIR,
-                             "customers_increment.csv")
+    file_path = INCREMENTAL_DATA_DIR / "customers_increment.csv"
 
     with open(file_path, 'w', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(
@@ -228,8 +226,7 @@ def save_customers_to_csv(customers):
 
 
 def save_orders_to_csv(orders):
-    file_path = os.path.join(INCREMENTAL_DATA_DIR,
-                             "orders_increment.csv")
+    file_path = INCREMENTAL_DATA_DIR / "orders_increment.csv"
     with open(file_path, 'w', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(
             file,
@@ -245,8 +242,7 @@ def save_orders_to_csv(orders):
         writer.writerows(orders)
 
 def save_order_items_to_csv(order_items):
-    file_path = os.path.join(INCREMENTAL_DATA_DIR,
-                             "order_items_increment.csv")
+    file_path = INCREMENTAL_DATA_DIR / "order_items_increment.csv"
     with open(file_path, 'w', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(
             file,
@@ -262,8 +258,7 @@ def save_order_items_to_csv(order_items):
         writer.writerows(order_items)
 
 def save_payments_to_csv(payments):
-    file_path = os.path.join(INCREMENTAL_DATA_DIR,
-                             "payments_increment.csv")
+    file_path = INCREMENTAL_DATA_DIR / "payments_increment.csv"
     with open(file_path, 'w', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(
             file,
@@ -279,8 +274,7 @@ def save_payments_to_csv(payments):
         writer.writerows(payments)
 
 def save_deliveries_to_csv(deliveries):
-    file_path = os.path.join(INCREMENTAL_DATA_DIR,
-                             "deliveries_increment.csv")
+    file_path = INCREMENTAL_DATA_DIR / "deliveries_increment.csv"
     with open(file_path, 'w', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(
             file,

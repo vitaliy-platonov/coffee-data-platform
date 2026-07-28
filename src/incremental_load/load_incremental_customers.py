@@ -1,7 +1,6 @@
 
 import logging
 import csv
-import os
 from config import INCREMENTAL_DATA_DIR
 from database import get_connection
 
@@ -9,10 +8,7 @@ def load_incremental_customers():
     conn = None
     cursor = None
     try:
-        file_path = os.path.join(
-            INCREMENTAL_DATA_DIR,
-            "customers_increment.csv"
-        )
+        file_path = INCREMENTAL_DATA_DIR / "customers_increment.csv"
 
         conn = get_connection()
         cursor = conn.cursor()

@@ -1,18 +1,13 @@
 
 import logging
 import logging_config
-import os
 
 import pandas as pd
 
 from config import RAW_DATA_DIR
 from database import get_connection
 
-file_path = os.path.join(
-    RAW_DATA_DIR,
-    "categories",
-    "categories.csv"
-)
+file_path = RAW_DATA_DIR / "categories" / "categories.csv"
 
 def load_categories():
     cursor = None

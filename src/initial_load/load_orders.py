@@ -2,11 +2,10 @@
 from database import get_connection
 import psycopg
 import csv
-import os
 from config import INITIAL_DATA_DIR
 import logging
 
-file_path = os.path.join(INITIAL_DATA_DIR, "orders.csv")
+file_path = INITIAL_DATA_DIR / "orders.csv"
 
 def load_orders(file_path):
     connection = None

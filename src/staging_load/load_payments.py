@@ -1,7 +1,6 @@
 
 from datetime import datetime
 import logging
-import os
 import logging_config
 
 import pandas as pd
@@ -9,11 +8,7 @@ import pandas as pd
 from config import RAW_DATA_DIR
 from database import get_connection
 
-file_path = os.path.join(
-    RAW_DATA_DIR,
-    "payments",
-    "payments.csv"
-)
+file_path = RAW_DATA_DIR / "payments" / "payments.csv"
 
 def load_payments():
     cursor = None

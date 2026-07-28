@@ -1,7 +1,7 @@
 
 from database import get_connection
 import psycopg
-import os
+from config import INITIAL_DATA_DIR, PROJECT_ROOT
 import logging
 logging.basicConfig(
     level=logging.INFO,
@@ -19,89 +19,28 @@ from load_deliveries import load_deliveries
 from load_payments import load_payments
 from load_order_items import load_order_items
 
-project_root = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "..",
-        ".."
-    )
-)
 
-categories_path = os.path.join(
-    project_root,
-    "data",
-    "initial",
-    "categories.csv"
-)
+categories_path = INITIAL_DATA_DIR / "categories.csv"
 
-suppliers_path = os.path.join(
-    project_root,
-    "data",
-    "initial",
-    "suppliers.csv"
-)
+suppliers_path = INITIAL_DATA_DIR / "suppliers.csv"
 
-stores_path = os.path.join(
-    project_root,
-    "data",
-    "initial",
-    "stores.csv"
-)
+stores_path = INITIAL_DATA_DIR / "stores.csv"
 
-customers_path = os.path.join(
-    project_root,
-    "data",
-    "initial",
-    "customers.csv"
-)
+customers_path = INITIAL_DATA_DIR / "customers.csv"
 
-products_path = os.path.join(
-    project_root,
-    "data",
-    "initial",
-    "products.csv"
-)
+products_path = INITIAL_DATA_DIR / "products.csv"
 
-employees_path = os.path.join(
-    project_root,
-    "data",
-    "initial",
-    "employees.csv"
-)
+employees_path = INITIAL_DATA_DIR / "employees.csv"
 
-orders_path = os.path.join(
-    project_root,
-    "data",
-    "initial",
-    "orders.csv"
-)
+orders_path = INITIAL_DATA_DIR / "orders.csv"
 
-deliveries_path = os.path.join(
-    project_root,
-    "data",
-    "initial",
-    "deliveries.csv"
-)
+deliveries_path = INITIAL_DATA_DIR / "deliveries.csv"
 
-payments_path = os.path.join(
-    project_root,
-    "data",
-    "initial",
-    "payments.csv"
-)
+payments_path = INITIAL_DATA_DIR / "payments.csv"
 
-order_items_path = os.path.join(
-    project_root,
-    "data",
-    "initial",
-    "order_items.csv"
-)
+order_items_path = INITIAL_DATA_DIR / "order_items.csv"
 
-reset_sql_path = os.path.join(
-    project_root,
-    "sql",
-    "reset_database.sql"
-)
+reset_sql_path = PROJECT_ROOT / "sql" / "reset_database.sql"
 
 
 def reset_database():

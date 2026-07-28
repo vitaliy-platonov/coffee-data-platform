@@ -1,6 +1,5 @@
 
 import logging
-import os
 import csv
 from config import INCREMENTAL_DATA_DIR
 from database import get_connection
@@ -9,8 +8,7 @@ def load_incremental_payments():
     cursor = None
     conn = None
     try:
-        file_path = os.path.join(INCREMENTAL_DATA_DIR,
-                                 "payments_increment.csv")
+        file_path = INCREMENTAL_DATA_DIR / "payments_increment.csv"
         conn = get_connection()
         cursor = conn.cursor()
 

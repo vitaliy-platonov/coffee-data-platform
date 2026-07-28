@@ -1,18 +1,13 @@
 
 import logging_config
 import logging
-import os
 
 import pandas as pd
 
 from config import RAW_DATA_DIR
 from database import get_connection
 
-file_path = os.path.join(
-    RAW_DATA_DIR,
-    "order_items",
-    "order_items.csv"
-)
+file_path = RAW_DATA_DIR / "order_items" / "order_items.csv"
 
 def load_order_items():
     cursor = None

@@ -1,19 +1,11 @@
 
 from database import get_connection
-import os
 import pandas as pd
+from pathlib import Path
+from config import RAW_DATA_DIR
 import logging
 
 from src import logger_config
-
-project_root = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "..",
-        ".."
-    )
-)
-
 
 def export_table(table_name: str, output_folder: str) -> None:
     conn = None
@@ -40,22 +32,10 @@ def export_table(table_name: str, output_folder: str) -> None:
             columns=columns
         )
 
-        output_dir = os.path.join(
-            project_root,
-            "data",
-            "raw",
-            output_folder
-        )
+        output_dir = RAW_DATA_DIR / output_folder
+        output_dir.mkdir(parents=True, exist_ok=True)
 
-        os.makedirs(
-            output_dir,
-            exist_ok=True
-        )
-
-        output_file = os.path.join(
-            output_dir,
-            f"{table_name}.csv"
-        )
+        output_file = output_dir / f"{table_name}.csv"
         logging.info(f"Exporting table: {table_name}")
 
         df.to_csv(
