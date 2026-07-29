@@ -2,10 +2,17 @@
 import logging
 
 import logging_config
+
 from database import get_connection
 
+LOGGER = logging.getLogger(__name__)
 
-def load_sales_mart():
+
+def load_sales_mart() -> None:
+    """
+    Load sales from core into marts.sales_mart.
+    """
+
     conn = None
     cursor = None
 
@@ -13,13 +20,18 @@ def load_sales_mart():
         conn = get_connection()
         cursor = conn.cursor()
 
-        logging.info("Loading Sales Mart...")
+        LOGGER.info(
+            "Loading Sales Mart"
+        )
 
-        cursor.execute("""
+        cursor.execute(
+            """
             TRUNCATE TABLE marts.sales_mart;
-        """)
+            """
+        )
 
-        cursor.execute("""
+        cursor.execute(
+            """
             INSERT INTO marts.sales_mart (
                 sale_date,
                 store_id,
@@ -42,13 +54,14 @@ def load_sales_mart():
                 ord.order_date,
                 st.store_id,
                 st.store_name;
-        """)
+            """
+        )
 
         rows_inserted = cursor.rowcount
 
         conn.commit()
 
-        logging.info(
+        LOGGER.info(
             f"Sales Mart loaded successfully. Rows inserted: {rows_inserted}"
         )
 
@@ -56,7 +69,12 @@ def load_sales_mart():
         if conn:
             conn.rollback()
 
-        logging.exception("Failed to load Sales Mart.")
+        LOGGER.exception(
+            "Failed to load sales mart"
+        )
+
+        if conn:
+            conn.rollback()
 
     finally:
         if cursor:
@@ -66,5 +84,12 @@ def load_sales_mart():
             conn.close()
 
 
-if __name__ == "__main__":
+def run() -> None:
+    """
+    Run the sales mart loader.
+    """
     load_sales_mart()
+
+
+if __name__ == "__main__":
+    run()
