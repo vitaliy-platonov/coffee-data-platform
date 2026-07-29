@@ -1,44 +1,65 @@
 
+import logging
 
-from incremental_generator import (
-    generate_customers,
-    save_customers_to_csv,
-    generate_orders,
-    save_orders_to_csv,
-    generate_order_items,
-    save_order_items_to_csv,
-    generate_payments,
-    save_payments_to_csv,
-    generate_deliveries,
-    save_deliveries_to_csv
-)
-from load_incremental_customers import load_incremental_customers
-from load_incremental_orders import load_incremental_orders
-from load_incremental_order_items import load_incremental_order_items
-from load_incremental_payments import load_incremental_payments
-from load_incremental_deliveries import load_incremental_deliveries
 import logging_config
 
-def run_incremental_load():
+from src.incremental_load.generate_customers import generate_customers
+from src.incremental_load.generate_orders import generate_orders
+from src.incremental_load.generate_order_items import generate_order_items
+from src.incremental_load.generate_payments import generate_payments
+from src.incremental_load.generate_deliveries import generate_deliveries
+
+from src.incremental_load.writers.csv_writer import (
+    save_customers_to_csv,
+    save_orders_to_csv,
+    save_order_items_to_csv,
+    save_payments_to_csv,
+    save_deliveries_to_csv,
+)
+
+from src.incremental_load.load_customers import run as run_customers
+from src.incremental_load.load_orders import run as run_orders
+from src.incremental_load.load_order_items import run as run_order_items
+from src.incremental_load.load_payments import run as run_payments
+from src.incremental_load.load_deliveries import run as run_deliveries
+
+
+LOGGER = logging.getLogger(__name__)
+
+
+def run() -> None:
+    """
+    Run incremental load pipeline.
+    """
+
+    LOGGER.info(
+        "Incremental load pipeline started"
+    )
+
     customers = generate_customers(5)
     save_customers_to_csv(customers)
-    load_incremental_customers()
+    run_customers()
 
     orders = generate_orders(5)
     save_orders_to_csv(orders)
-    load_incremental_orders()
+    run_orders()
 
     order_items = generate_order_items(5)
     save_order_items_to_csv(order_items)
-    load_incremental_order_items()
+    run_order_items()
 
     payments = generate_payments(5)
     save_payments_to_csv(payments)
-    load_incremental_payments()
+    run_payments()
 
     deliveries = generate_deliveries(5)
     save_deliveries_to_csv(deliveries)
-    load_incremental_deliveries()
+    run_deliveries()
 
-if __name__ == '__main__':
-    run_incremental_load()
+    LOGGER.info(
+        "Incremental load pipeline completed successfully"
+    )
+
+
+if __name__ == "__main__":
+    run()
