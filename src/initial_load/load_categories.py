@@ -1,14 +1,22 @@
 
-from database import get_connection
-import psycopg
 import csv
-from config import INITIAL_DATA_DIR
 import logging
 
+import psycopg
 
-file_path = INITIAL_DATA_DIR / "categories.csv"
+import logging_config
 
-def load_categories(file_path):
+from config import INITIAL_DATA_DIR
+from database import get_connection
+
+LOGGER = logging.getLogger(__name__)
+
+
+def load_categories(file_path) -> int:
+    """
+    Load categories from initial CSV file into database.
+    """
+
     connection = None
 
     try:
@@ -27,25 +35,55 @@ def load_categories(file_path):
 
                 cursor.execute(
                     """
-                    INSERT INTO categories (category_id, category_name)
+                    INSERT INTO categories (
+                        category_id,
+                        category_name
+                    )
                     VALUES (%s, %s);
                     """,
-                    (row[0], row[1])
+                    (
+                        row[0],
+                        row[1],
+                    ),
                 )
+
                 rows_loaded += 1
 
         connection.commit()
+
+        LOGGER.info(
+            "Categories loaded: %s",
+            rows_loaded
+        )
+
         return rows_loaded
 
-    except psycopg.OperationalError as error:
-        logging.error(f"Database connection error: {error}")
+    except psycopg.OperationalError:
+        LOGGER.exception(
+            "Database connection error"
+        )
+        return 0
 
-    except FileNotFoundError as error:
-        logging.error(f"File not found: {error}")
+    except FileNotFoundError:
+        LOGGER.exception(
+            "Initial categories file not found"
+        )
+        return 0
 
     finally:
         if connection:
             connection.close()
 
-if __name__ == "__main__":
+
+def run() -> None:
+    """
+    Run categories loader.
+    """
+
+    file_path = INITIAL_DATA_DIR / "categories.csv"
+
     load_categories(file_path)
+
+
+if __name__ == "__main__":
+    run()
