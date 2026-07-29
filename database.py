@@ -1,5 +1,8 @@
 
+import logging
+
 import psycopg
+
 from config import (
     DB_HOST,
     DB_PORT,
@@ -8,16 +11,26 @@ from config import (
     DB_PASSWORD
 )
 
-def get_connection():
+LOGGER = logging.getLogger(__name__)
+
+
+def get_connection() -> psycopg.Connection:
+    """
+    Create PostgreSQL database connection.
+
+    Returns:
+        psycopg.Connection: Active database connection.
+    """
     try:
-        connection = psycopg.connect(
+        return psycopg.connect(
             host=DB_HOST,
             port=DB_PORT,
             dbname=DB_NAME,
             user=DB_USER,
             password=DB_PASSWORD
         )
-        return connection
+
     except psycopg.OperationalError as error:
-        print(f"Database connection failed {error}")
+        LOGGER.error("Database connection failed: %s", error)
+        raise
 
