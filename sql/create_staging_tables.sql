@@ -1,5 +1,5 @@
 
-
+CREATE SCHEMA IF NOT EXISTS staging;
 
 CREATE TABLE staging.categories (
     category_id   INTEGER PRIMARY KEY,
