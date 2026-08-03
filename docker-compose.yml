@@ -1,8 +1,6 @@
-
 services:
   postgres:
     container_name: coffee_postgres
-
     image: postgres:15
 
     ports:
@@ -15,6 +13,19 @@ services:
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  etl:
+    container_name: coffee_etl
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    env_file:
+      - .env.docker
+
+    stdin_open: true
+    tty: true
 
 volumes:
   postgres_data:
