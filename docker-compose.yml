@@ -1,3 +1,14 @@
+x-airflow-common: &airflow-common
+  build:
+    context: .
+    dockerfile: airflow/Dockerfile
+
+  env_file:
+    - .env.docker
+
+  depends_on:
+    - postgres
+
 services:
   postgres:
     container_name: coffee_postgres
@@ -26,6 +37,13 @@ services:
 
     stdin_open: true
     tty: true
+
+  airflow-init:
+    <<: *airflow-common
+
+    container_name: coffee_airflow_init
+
+    command: version
 
 volumes:
   postgres_data:
