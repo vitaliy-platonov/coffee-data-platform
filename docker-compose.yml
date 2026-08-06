@@ -6,6 +6,9 @@ x-airflow-common: &airflow-common
   env_file:
     - .env.docker
 
+  environment:
+    PYTHONPATH: /opt/airflow/project/src
+
   depends_on:
     - postgres
 
@@ -43,7 +46,50 @@ services:
 
     container_name: coffee_airflow_init
 
-    command: version
+    command: >
+      bash -c "
+      airflow db migrate &&
+      airflow users create
+      --username airflow
+      --firstname Admin
+      --lastname User
+      --role Admin
+      --email admin@example.com
+      --password airflow
+      "
+      
+  airflow-webserver:
+    <<: *airflow-common
+
+    container_name: coffee_airflow_webserver
+
+    command: webserver
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./:/opt/airflow/project
+
+    restart: unless-stopped
+
+  airflow-scheduler:
+    <<: *airflow-common
+
+    container_name: coffee_airflow_scheduler
+
+    command: scheduler
+
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./:/opt/airflow/project
+
+    restart: unless-stopped
 
 volumes:
   postgres_data:
