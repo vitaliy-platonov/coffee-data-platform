@@ -91,5 +91,17 @@ services:
 
     restart: unless-stopped
 
+  dbt:
+    build:
+      context: ./dbt
+      dockerfile: Dockerfile
+    container_name: coffee_dbt
+    working_dir: /app
+    volumes:
+      - ./dbt:/app
+      - ./.dbt:/root/.dbt
+    depends_on:
+      - postgres
+
 volumes:
   postgres_data:
