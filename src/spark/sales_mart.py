@@ -14,7 +14,6 @@ from pyspark.sql.types import DecimalType, IntegerType
 
 LOGGER = logging.getLogger(__name__)
 
-
 def configure_jdbc_driver() -> None:
     """
     Configure PostgreSQL JDBC driver for PySpark.
@@ -26,16 +25,6 @@ def configure_jdbc_driver() -> None:
         / "postgresql-42.7.13.jar"
     )
 
-    buffer = ctypes.create_unicode_buffer(1024)
-
-    ctypes.windll.kernel32.GetShortPathNameW(
-        str(driver_path),
-        buffer,
-        1024,
-    )
-
-    short_driver_path = buffer.value
-
     LOGGER.info(
         f"JDBC driver: {driver_path}"
     )
@@ -44,12 +33,35 @@ def configure_jdbc_driver() -> None:
         f"Driver exists: {driver_path.exists()}"
     )
 
-    LOGGER.info(
-        f"Short path: {short_driver_path}"
-    )
+    if not driver_path.exists():
+        raise FileNotFoundError(
+            f"JDBC driver not found: {driver_path}"
+        )
+
+    if os.name == "nt":
+        buffer = ctypes.create_unicode_buffer(1024)
+
+        ctypes.windll.kernel32.GetShortPathNameW(
+            str(driver_path),
+            buffer,
+            1024,
+        )
+
+        driver_path_for_spark = buffer.value
+
+        LOGGER.info(
+            f"Windows short path: {driver_path_for_spark}"
+        )
+
+    else:
+        driver_path_for_spark = str(driver_path)
+
+        LOGGER.info(
+            f"Linux path: {driver_path_for_spark}"
+        )
 
     os.environ["PYSPARK_SUBMIT_ARGS"] = (
-        f'--driver-class-path "{short_driver_path}" pyspark-shell'
+        f'--driver-class-path "{driver_path_for_spark}" pyspark-shell'
     )
 
 
@@ -64,20 +76,24 @@ def create_spark_session() -> SparkSession:
         .getOrCreate()
     )
 
-
 def get_jdbc_config() -> tuple[str, dict]:
     """
     Return PostgreSQL JDBC connection configuration.
     """
 
+    host = os.getenv("DB_HOST", "localhost")
+    port = os.getenv("DB_PORT", "5432")
+    database = os.getenv("DB_NAME", "coffee_data_platform")
+    user = os.getenv("DB_USER", "postgres")
+    password = os.getenv("DB_PASSWORD", "1234")
+
     jdbc_url = (
-        "jdbc:postgresql://localhost:5432/"
-        "coffee_data_platform"
+        f"jdbc:postgresql://{host}:{port}/{database}"
     )
 
     properties = {
-        "user": "postgres",
-        "password": "1234",
+        "user": user,
+        "password": password,
         "driver": "org.postgresql.Driver",
     }
 
@@ -292,7 +308,6 @@ def read_temp_mart(
         properties=properties,
     )
 
-
 def load_temp_to_mart() -> None:
     """
     Replace the final sales MART with data
@@ -300,11 +315,11 @@ def load_temp_to_mart() -> None:
     """
 
     with psycopg.connect(
-        host="localhost",
-        port=5432,
-        dbname="coffee_data_platform",
-        user="postgres",
-        password="1234",
+        host=os.getenv("DB_HOST", "localhost"),
+        port=int(os.getenv("DB_PORT", "5432")),
+        dbname=os.getenv("DB_NAME", "coffee_data_platform"),
+        user=os.getenv("DB_USER", "postgres"),
+        password=os.getenv("DB_PASSWORD", "1234"),
     ) as conn:
 
         with conn.cursor() as cur:
@@ -335,7 +350,6 @@ def load_temp_to_mart() -> None:
                 FROM marts.sales_mart_pyspark_tmp;
                 """
             )
-
 
 def run() -> None:
     """
