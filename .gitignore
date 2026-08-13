@@ -7,3 +7,5 @@ data/incremental/*.csv
 airflow/logs/
 
 .dbt/profiles.yml
+
+drivers/*.jar
