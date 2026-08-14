@@ -9,3 +9,4 @@ airflow/logs/
 .dbt/profiles.yml
 
 drivers/*.jar
+.dbt/.user.yml

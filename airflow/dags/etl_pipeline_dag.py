@@ -70,8 +70,8 @@ with DAG(
     run_marts_pipeline = BashOperator(
         task_id='run_marts_pipeline',
         bash_command="""
-        cd /opt/airflow/project/src/marts &&
-        PYTHONPATH=/opt/airflow/project python run_marts_load.py
+        cd /opt/airflow/project/dbt &&
+        dbt run --log-path /tmp/dbt_logs --target-path /tmp/dbt_target
         """,
         retries=2,
         retry_delay=timedelta(minutes=2),

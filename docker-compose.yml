@@ -73,6 +73,7 @@ services:
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
       - ./:/opt/airflow/project
+      - ./.dbt:/home/airflow/.dbt
 
     restart: unless-stopped
 
@@ -88,6 +89,7 @@ services:
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
       - ./:/opt/airflow/project
+      - ./.dbt:/home/airflow/.dbt
 
     restart: unless-stopped
 
