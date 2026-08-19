@@ -2,6 +2,7 @@
 __pycache__/
 *.pyc
 .env
+.env.docker
 data/incremental/*.csv
 
 airflow/logs/

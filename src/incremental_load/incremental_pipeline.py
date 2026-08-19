@@ -44,7 +44,7 @@ def run() -> None:
     save_orders_to_csv(orders)
     run_orders()
 
-    order_items = generate_order_items(5)
+    order_items = generate_order_items(orders)
     save_order_items_to_csv(order_items)
     run_order_items()
 

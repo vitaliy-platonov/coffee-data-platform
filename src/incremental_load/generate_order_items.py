@@ -1,4 +1,3 @@
-
 import logging
 import random
 
@@ -7,7 +6,6 @@ import logging_config
 from database import get_connection
 
 from src.incremental_load.database_utils import (
-    get_existing_order_ids,
     get_product_prices,
 )
 
@@ -37,9 +35,7 @@ def get_next_order_item_id() -> int:
     return next_order_item_id + 1
 
 
-
-
-def generate_order_items(count: int) -> list:
+def generate_order_items(orders: list) -> list:
     """
     Generate incremental order items data.
     """
@@ -48,19 +44,17 @@ def generate_order_items(count: int) -> list:
 
     next_order_item_id = get_next_order_item_id()
 
-    order_ids = get_existing_order_ids()
-
     product_prices = get_product_prices()
 
     product_ids = list(product_prices.keys())
 
-    for i in range(count):
+    for i in range(len(orders)):
 
         product_id = random.choice(product_ids)
 
         order_item = {
             "order_item_id": next_order_item_id + i,
-            "order_id": random.choice(order_ids),
+            "order_id": orders[i]["order_id"],
             "product_id": product_id,
             "quantity": random.randint(1, 5),
             "price": product_prices[product_id],

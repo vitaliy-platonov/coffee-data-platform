@@ -85,7 +85,7 @@ def get_jdbc_config() -> tuple[str, dict]:
     port = os.getenv("DB_PORT", "5432")
     database = os.getenv("DB_NAME", "coffee_data_platform")
     user = os.getenv("DB_USER", "postgres")
-    password = os.getenv("DB_PASSWORD", "1234")
+    password = os.getenv("DB_PASSWORD")
 
     jdbc_url = (
         f"jdbc:postgresql://{host}:{port}/{database}"
@@ -319,7 +319,7 @@ def load_temp_to_mart() -> None:
         port=int(os.getenv("DB_PORT", "5432")),
         dbname=os.getenv("DB_NAME", "coffee_data_platform"),
         user=os.getenv("DB_USER", "postgres"),
-        password=os.getenv("DB_PASSWORD", "1234"),
+        password=os.getenv("DB_PASSWORD"),
     ) as conn:
 
         with conn.cursor() as cur:

@@ -23,7 +23,7 @@ services:
     environment:
       POSTGRES_DB: coffee_data_platform
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1234
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -55,7 +55,7 @@ services:
       --lastname User
       --role Admin
       --email admin@example.com
-      --password airflow
+      --password ${_AIRFLOW_WWW_USER_PASSWORD}
       "
       
   airflow-webserver:

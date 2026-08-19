@@ -69,17 +69,16 @@ def generate_payments(count: int) -> list:
             ),
             "payment_method": random.choice(
                 [
-                    "card",
-                    "cash",
+                    "Card",
+                    "Cash",
                     "online",
                 ]
             ),
             "amount": order_amounts[order_id],
             "status": random.choice(
                 [
-                    "completed",
-                    "pending",
-                    "failed",
+                    "Paid",
+                    "Refunded",
                 ]
             ),
         }
