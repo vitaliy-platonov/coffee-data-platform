@@ -242,6 +242,9 @@ http://localhost:8080
 - Username: `airflow`
 - Password: `airflow`
 
+> Указанные в `.env.example` учетные данные предназначены только для локальной разработки. Не используйте их в production.
+
+
 Основной ETL workflow:
 
 `etl_pipeline`
