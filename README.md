@@ -224,9 +224,10 @@ cd coffee-data-platform
 ```powershell
 Copy-Item .env.example .env
 Copy-Item .env.docker.example .env.docker
+Copy-Item .dbt\profiles.yml.example .dbt\profiles.yml
 ```
 
-Файлы `.env` и `.env.docker` используются только локально и не добавляются в Git.
+Файлы `.env`, `.env.docker` и `.dbt/profiles.yml` используются только локально и не добавляются в Git.
 
 Указанные в шаблонах учётные данные предназначены только для локальной разработки. Не используйте их в production.
 
