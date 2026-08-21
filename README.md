@@ -230,6 +230,23 @@ docker compose up -d --build
 
 docker compose ps
 
+
+### Airflow
+
+После запуска инфраструктуры Airflow Web UI доступен по адресу:
+
+http://localhost:8080
+
+Для локального входа используются:
+
+- Username: `airflow`
+- Password: `airflow`
+
+Основной ETL workflow:
+
+`etl_pipeline`
+
+
 ### 5. Запуск основного ETL pipeline
 
 Основной pipeline запускается через Apache Airflow.
@@ -293,7 +310,6 @@ sales_pyspark_dag
 
 ## Статус проекта
 
-Проект находится в стадии финальной подготовки portfolio release.
+Проект завершён и готов к использованию в портфолио.
 
-Основные компоненты платформы реализованы и проходят финальный технический аудит.
-
+Основные компоненты платформы реализованы, протестированы и интегрированы в единый End-to-End pipeline.
