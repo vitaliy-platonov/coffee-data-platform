@@ -11,3 +11,6 @@ airflow/logs/
 
 drivers/*.jar
 .dbt/.user.yml
+
+dbt/target/
+dbt/logs/
