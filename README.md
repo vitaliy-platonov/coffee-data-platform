@@ -212,43 +212,50 @@ coffee-data-platform/
 
 ### 1. Клонирование репозитория
 
-git clone <URL_репозитория>
-
+```powershell
+git clone https://github.com/vitaliy-platonov/coffee-data-platform.git
 cd coffee-data-platform
+```
 
 ### 2. Настройка конфигурации
 
-Создай необходимые environment variables на основе:
+Создай локальные файлы конфигурации:
 
-.env.example
+```powershell
+Copy-Item .env.example .env
+Copy-Item .env.docker.example .env.docker
+```
+
+Файлы `.env` и `.env.docker` используются только локально и не добавляются в Git.
+
+Указанные в шаблонах учётные данные предназначены только для локальной разработки. Не используйте их в production.
 
 ### 3. Запуск инфраструктуры
 
+```powershell
 docker compose up -d --build
+```
 
 ### 4. Проверка контейнеров
 
+```powershell
 docker compose ps
-
+```
 
 ### Airflow
 
 После запуска инфраструктуры Airflow Web UI доступен по адресу:
 
-http://localhost:8080
+[http://localhost:8080](http://localhost:8080)
 
 Для локального входа используются:
 
 - Username: `airflow`
 - Password: `airflow`
 
-> Указанные в `.env.example` учетные данные предназначены только для локальной разработки. Не используйте их в production.
-
-
 Основной ETL workflow:
 
 `etl_pipeline`
-
 
 ### 5. Запуск основного ETL pipeline
 
@@ -256,10 +263,11 @@ http://localhost:8080
 
 DAG:
 
-etl_pipeline
+`etl_pipeline`
 
 Основная последовательность:
 
+```text
 Initial Load
 ↓
 Incremental Load
@@ -271,48 +279,12 @@ STAGING Pipeline
 CORE Pipeline
 ↓
 dbt Marts
+```
 
 ### 6. Запуск PySpark workflow
 
 Отдельный DAG:
 
-sales_pyspark_dag
+`sales_pyspark_dag`
 
 Он запускает построение Sales MART с использованием PySpark.
-
-
-## Результат проекта
-
-В результате построена End-to-End Data Engineering платформа, которая объединяет:
-
-- операционные данные;
-- ETL-процессы;
-- Data Warehouse;
-- аналитические MARTS;
-- SQL-трансформации;
-- распределённую аналитическую обработку;
-- оркестрацию;
-- BI-визуализацию.
-
-Проект демонстрирует практическое применение Python, PostgreSQL, Docker, Apache Airflow, dbt, PySpark и Power BI в единой Data Engineering платформе.
-
-## Назначение проекта для портфолио
-
-Проект демонстрирует навыки:
-
-- построения ETL pipeline;
-- работы с PostgreSQL;
-- проектирования Data Warehouse;
-- работы с RAW, STAGING, CORE и MARTS слоями;
-- разработки SQL-трансформаций;
-- оркестрации процессов;
-- контейнеризации;
-- аналитической обработки данных с помощью PySpark;
-- подготовки данных для BI;
-- документирования Data Engineering проекта.
-
-## Статус проекта
-
-Проект завершён и готов к использованию в портфолио.
-
-Основные компоненты платформы реализованы, протестированы и интегрированы в единый End-to-End pipeline.
