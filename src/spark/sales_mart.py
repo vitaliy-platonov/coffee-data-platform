@@ -19,10 +19,13 @@ def configure_jdbc_driver() -> None:
     Configure PostgreSQL JDBC driver for PySpark.
     """
 
-    driver_path = (
-        Path(__file__).resolve().parents[2]
-        / "drivers"
-        / "postgresql-42.7.13.jar"
+    driver_path = Path(
+        os.getenv(
+            "POSTGRES_JDBC_DRIVER",
+            Path(__file__).resolve().parents[2]
+            / "drivers"
+            / "postgresql-42.7.13.jar",
+        )
     )
 
     LOGGER.info(

@@ -12,6 +12,11 @@ RUN apt-get update && apt-get install -y \
 
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 
+RUN mkdir -p /opt/airflow/jdbc \
+    && curl -fL \
+    https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar \
+    -o /opt/airflow/jdbc/postgresql-42.7.13.jar
+
 USER airflow
 
 COPY requirements.txt /requirements.txt

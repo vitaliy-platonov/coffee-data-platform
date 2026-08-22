@@ -8,6 +8,7 @@ x-airflow-common: &airflow-common
 
   environment:
     PYTHONPATH: /opt/airflow/project/src
+    POSTGRES_JDBC_DRIVER: /opt/airflow/jdbc/postgresql-42.7.13.jar
 
   depends_on:
     - postgres
