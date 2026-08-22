@@ -2,6 +2,12 @@
 
 End-to-End Data Engineering платформа для обработки операционных данных сети кофеен и подготовки аналитических данных для бизнес-аналитики.
 
+## Статус проекта
+
+**Project status: Completed**
+
+Проект завершён как portfolio-level End-to-End Data Engineering проект.
+
 ## Цель проекта
 
 Проект демонстрирует полный цикл построения Data Engineering платформы:
@@ -25,29 +31,29 @@ End-to-End Data Engineering платформа для обработки опе�
 Основной поток данных:
 
 Initial / Incremental Data
-↓
+        ↓
 Python Ingestion
-↓
-OLTP
-↓
+        ↓
+PostgreSQL OLTP
+        ↓
 RAW
-↓
+        ↓
 STAGING
-↓
-CORE
-↓
+        ↓
+CORE Data Warehouse
+        ↓
 dbt MARTS
-↓
+        ↓
 Power BI
 
 Отдельный аналитический workflow:
 
 CORE
-↓
+        ↓
 PySpark
-↓
+        ↓
 Sales MART
-↓
+        ↓
 Аналитическое использование
 
 Apache Airflow используется для оркестрации workflow.
@@ -163,40 +169,46 @@ PostgreSQL является центральным хранилищем данн
 ## Структура проекта
 
 coffee-data-platform/
-
+│
 ├── airflow/
-│   └── dags/
-
+│   ├── dags/
+│   └── plugins/
+│
 ├── data/
 │   ├── initial/
 │   ├── incremental/
 │   └── raw/
-
+│
 ├── dbt/
-│   └── models/
-│       └── marts/
-
+│   ├── models/
+│   │   └── marts/
+│   └── dbt_project.yml
+│
+├── docker/
+│   └── postgres/
+│       └── init/
+│
 ├── docs/
-
-├── drivers/
-
+│
 ├── sql/
-
+│
 ├── src/
 │   ├── initial_load/
 │   ├── incremental_load/
 │   ├── raw_layer/
 │   ├── staging_load/
 │   ├── core_load/
+│   ├── marts/
 │   └── spark/
-
+│
 ├── tests/
-
+│
 ├── utils/
-
-├── docker-compose.yml
+│
 ├── Dockerfile
+├── docker-compose.yml
 ├── requirements.txt
+├── pytest.ini
 └── README.md
 
 
@@ -289,3 +301,18 @@ dbt Marts
 `sales_pyspark_dag`
 
 Он запускает построение Sales MART с использованием PySpark.
+
+## Power BI
+
+В репозитории находится готовый Power BI report:
+
+`coffee_data_platform_power_bi.pbix`
+
+Отчёт используется для аналитического представления подготовленных данных.
+
+Основные направления анализа:
+
+- Sales;
+- Customers;
+- Products;
+- Stores.
